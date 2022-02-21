@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:vpapp/pages/announcements.dart';
 
 class AppDrawer extends StatelessWidget {
@@ -29,7 +30,7 @@ class AppDrawer extends StatelessWidget {
               style: theme.textTheme.titleLarge,
             ),
             onTap: () {
-              Navigator.of(context).pushNamed(AnnouncementsPage.routeName);
+              context.push(AnnouncementsPage.routeName);
             },
           ),
         ],

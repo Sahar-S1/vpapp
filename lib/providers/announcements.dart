@@ -17,6 +17,18 @@ class AnnouncementsProvider {
     return res.data['data'][0]['count']['id'] as int;
   }
 
+  Future<Announcement> getOne(int id) async {
+    var res = await _directus.dio.get(
+      _endpoint,
+      queryParameters: {
+        'fields': ['*.*'],
+        'filter[id][_eq]': id,
+      },
+    );
+
+    return Announcement.fromMap(res.data['data'][0] as Map<String, dynamic>);
+  }
+
   Future<List<Announcement>> getPage(int pageKey, int pageSize) async {
     var page = ((pageKey - 1) / pageSize) + 1;
 

@@ -4,7 +4,7 @@ import 'package:vpapp/components/common/drawer.dart';
 import 'package:vpapp/config.dart';
 
 class HomePage extends StatelessWidget {
-  static const routeName = '/';
+  static const routeName = '/home';
 
   const HomePage({Key? key}) : super(key: key);
 

@@ -1,16 +1,31 @@
-import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:vpapp/pages/announcement.dart';
 import 'package:vpapp/pages/announcements.dart';
 import 'package:vpapp/pages/home.dart';
+import 'package:vpapp/providers.dart';
 
-class AppRouter {
-  static const String? initialRoute = '/';
-
-  static final Map<String, Widget Function(BuildContext)> routes = {
-    HomePage.routeName: (context) => const HomePage(),
-    AnnouncementsPage.routeName: (context) => const AnnouncementsPage(),
-  };
-
-  static Route<dynamic>? onGenerateRoute(RouteSettings settings) {
-    return null;
-  }
-}
+final router = GoRouter(
+  initialLocation: '/',
+  routes: [
+    GoRoute(
+      path: '/',
+      redirect: (_) => HomePage.routeName,
+    ),
+    GoRoute(
+      path: HomePage.routeName,
+      builder: (context, state) => const HomePage(),
+    ),
+    GoRoute(
+      path: AnnouncementsPage.routeName,
+      builder: (context, state) => const AnnouncementsPage(),
+    ),
+    GoRoute(
+      path: AnnouncementPage.routeName,
+      builder: (context, state) => AnnouncementPage(
+        id: int.parse(state.params['id'] ?? '-1'),
+      ),
+    ),
+  ],
+  navigatorBuilder: (context, state, child) => AppProviders(child: child),
+  debugLogDiagnostics: true,
+);

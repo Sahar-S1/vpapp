@@ -10,17 +10,16 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppProviders(
-      child: MaterialApp(
+      child: MaterialApp.router(
         // Title
         title: AppConfig.title,
         // Theme
         theme: AppTheme.theme,
         darkTheme: AppTheme.darkTheme,
         themeMode: AppTheme.themeMode,
-        // Routes
-        routes: AppRouter.routes,
-        onGenerateRoute: AppRouter.onGenerateRoute,
-        initialRoute: AppRouter.initialRoute,
+        // Router
+        routeInformationParser: router.routeInformationParser,
+        routerDelegate: router.routerDelegate,
       ),
     );
   }
