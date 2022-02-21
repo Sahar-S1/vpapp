@@ -2,7 +2,6 @@ import 'package:go_router/go_router.dart';
 import 'package:vpapp/pages/announcement.dart';
 import 'package:vpapp/pages/announcements.dart';
 import 'package:vpapp/pages/home.dart';
-import 'package:vpapp/providers.dart';
 
 final router = GoRouter(
   initialLocation: '/',
@@ -26,6 +25,5 @@ final router = GoRouter(
       ),
     ),
   ],
-  navigatorBuilder: (context, state, child) => AppProviders(child: child),
   debugLogDiagnostics: true,
 );

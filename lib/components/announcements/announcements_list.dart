@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:get_it_mixin/get_it_mixin.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:provider/provider.dart';
 import 'package:vpapp/components/announcements/announcement_card.dart';
 import 'package:vpapp/models/announcement.dart';
-import 'package:vpapp/providers/announcements.dart';
+import 'package:vpapp/services/announcements.dart';
 
-class AnnouncementsList extends StatefulWidget {
-  const AnnouncementsList({Key? key}) : super(key: key);
+class AnnouncementsList extends StatefulWidget with GetItStatefulWidgetMixin {
+  AnnouncementsList({Key? key}) : super(key: key);
 
   @override
   _AnnouncementsListState createState() => _AnnouncementsListState();
 }
 
-class _AnnouncementsListState extends State<AnnouncementsList> {
+class _AnnouncementsListState extends State<AnnouncementsList>
+    with GetItStateMixin {
   static const _pageSize = 20;
 
   final PagingController<int, Announcement> _pagingController =
@@ -29,8 +30,7 @@ class _AnnouncementsListState extends State<AnnouncementsList> {
   Future<void> _fetchPage(int pageKey) async {
     try {
       final newItems =
-          await Provider.of<AnnouncementsProvider>(context, listen: false)
-              .getPage(pageKey, _pageSize);
+          await get<AnnouncementsService>().getPage(pageKey, _pageSize);
       final isLastPage = newItems.length < _pageSize;
       if (isLastPage) {
         _pagingController.appendLastPage(newItems);

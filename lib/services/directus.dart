@@ -8,15 +8,13 @@ import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:vpapp/config.dart';
 
-class DirectusProvider {
-  static DirectusProvider? _instance;
-  static DirectusProvider get instance => _instance ??= DirectusProvider._();
-  DirectusProvider._();
-
+class DirectusService {
   late final Dio dio;
   late final CookieJar cj;
 
-  Future<void> init() async {
+  DirectusService();
+
+  Future<DirectusService> init() async {
     // Initialize Dio
     dio = Dio(
       BaseOptions(
@@ -26,6 +24,8 @@ class DirectusProvider {
     );
 
     await _initInterceptors();
+
+    return this;
   }
 
   Future<void> _initInterceptors() async {

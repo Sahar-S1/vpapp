@@ -1,48 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
+import 'package:get_it_mixin/get_it_mixin.dart';
 import 'package:vpapp/components/common/html.dart';
 import 'package:vpapp/models/announcement.dart';
-import 'package:vpapp/providers/announcements.dart';
+import 'package:vpapp/services/announcements.dart';
 
-class AnnouncementPage extends StatefulWidget {
+class AnnouncementPage extends StatelessWidget with GetItMixin {
   static const routeName = '/announcements/:id';
 
   final int id;
 
-  const AnnouncementPage({Key? key, required this.id}) : super(key: key);
-
-  @override
-  State<AnnouncementPage> createState() => _AnnouncementPageState();
-}
-
-class _AnnouncementPageState extends State<AnnouncementPage> {
-  Future<Announcement>? _future;
-
-  @override
-  void initState() {
-    super.initState();
-    _fetch();
-  }
-
-  @override
-  void didUpdateWidget(covariant AnnouncementPage oldWidget) {
-    super.didUpdateWidget(oldWidget);
-
-    // refresh cached data
-    if (oldWidget.id != widget.id) _fetch();
-  }
-
-  void _fetch() =>
-      _future = Provider.of<AnnouncementsProvider>(context, listen: false)
-          .getOne(widget.id);
+  AnnouncementPage({Key? key, required this.id}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
 
     return FutureBuilder<Announcement>(
-      future: _future,
+      future: get<AnnouncementsService>().getOne(id),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Scaffold(

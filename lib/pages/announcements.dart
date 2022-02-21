@@ -12,7 +12,7 @@ class AnnouncementsPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Annocements'),
       ),
-      body: const AnnouncementsList(),
+      body: AnnouncementsList(),
     );
   }
 }

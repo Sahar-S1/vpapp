@@ -15,19 +15,18 @@ dependencies:
   dio: ^4.0.4 # Http Client
   intl: ^0.17.0 # Date Formater
   hive: ^2.0.5 # Local Data Storage
+  get_it: ^7.2.0 # Service Locator
+  get_it_mixin: ^3.1.4 # Widgets and GetIt Service Objects Binder Mixin
   hive_flutter: ^1.1.0 # Local Data Storage
-  provider: ^6.0.2 # Global State Management Solution
   go_router: ^3.0.1 # Router
   url_launcher: ^6.0.20 # URL Launcher
   flutter_html: ^2.2.1 # HTML Renderer
   path_provider: ^2.0.9 # Path Provider
   infinite_scroll_pagination: ^3.1.0 # Pageinated List/Grid
-  
-  # Dio Plugins
   cookie_jar: ^3.0.1 # Store Cookies
-  dio_cookie_manager: ^2.0.0 # Cookie Manager
-  dio_cache_interceptor: ^3.2.5 # Cache Interceptor
-  dio_cache_interceptor_hive_store: ^3.1.1 # Hive Cache Store
+  dio_cookie_manager: ^2.0.0 # Dio Cookie Manager
+  dio_cache_interceptor: ^3.2.5 # Dio Cache Interceptor
+  dio_cache_interceptor_hive_store: ^3.1.1 # Dio Hive Cache Store
 
 dev_dependencies:
   flutter_test:
