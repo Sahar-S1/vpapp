@@ -12,7 +12,7 @@ class AppProviders extends MultiProvider {
           key: key,
           providers: [
             Provider<DirectusProvider>(
-              create: (ctx) => DirectusProvider(),
+              create: (ctx) => DirectusProvider.instance,
               lazy: false,
             ),
             Provider<AnnouncementsProvider>(
