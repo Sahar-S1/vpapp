@@ -1,12 +1,12 @@
 import 'package:vpapp/models/announcement.dart';
 import 'package:vpapp/services/directus.dart';
 
-class AnnouncementsService {
+class AnnouncementService {
   static const String _endpoint = '/items/announcement';
 
   final DirectusService _directus;
 
-  AnnouncementsService({required directus}) : _directus = directus;
+  AnnouncementService({required directus}) : _directus = directus;
 
   Future<int> getCount() async {
     var res = await _directus.dio.get(

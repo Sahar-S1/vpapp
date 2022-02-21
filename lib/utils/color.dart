@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 
-Color getColorFromHex(String hexColor) {
-  hexColor = hexColor.toUpperCase().replaceAll('#', '');
-  if (hexColor.length == 6) {
-    hexColor = 'FF' + hexColor;
+Color hexToColor(String hex) {
+  hex = hex.toUpperCase().replaceAll('#', '');
+  if (hex.length == 6) {
+    hex = 'FF' + hex;
   }
-  return Color(int.parse(hexColor, radix: 16));
+  return Color(int.parse(hex, radix: 16));
+}
+
+String colorToHex(Color color) {
+  return '#${color.value.toRadixString(16)}';
 }

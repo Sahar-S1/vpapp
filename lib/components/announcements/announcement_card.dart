@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:vpapp/models/announcement.dart';
 import 'package:vpapp/pages/announcement.dart';
-import 'package:vpapp/utils/color.dart';
 
 class AnnouncementCard extends StatelessWidget {
   final Announcement announcement;
@@ -23,7 +22,7 @@ class AnnouncementCard extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(2),
           side: BorderSide(
-            color: getColorFromHex(announcement.category.color),
+            color: announcement.category.color,
             width: 1.0,
             style: BorderStyle.solid,
           ),
@@ -65,7 +64,7 @@ class AnnouncementCard extends StatelessWidget {
                         flex: 1,
                         child: Icon(
                           Icons.play_arrow,
-                          color: getColorFromHex(announcement.category.color),
+                          color: announcement.category.color,
                         ),
                       ),
                       Expanded(

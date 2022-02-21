@@ -3,7 +3,7 @@ import 'package:get_it_mixin/get_it_mixin.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:vpapp/components/announcements/announcement_card.dart';
 import 'package:vpapp/models/announcement.dart';
-import 'package:vpapp/services/announcements.dart';
+import 'package:vpapp/services/announcement.dart';
 
 class AnnouncementsList extends StatefulWidget with GetItStatefulWidgetMixin {
   AnnouncementsList({Key? key}) : super(key: key);
@@ -30,7 +30,7 @@ class _AnnouncementsListState extends State<AnnouncementsList>
   Future<void> _fetchPage(int pageKey) async {
     try {
       final newItems =
-          await get<AnnouncementsService>().getPage(pageKey, _pageSize);
+          await get<AnnouncementService>().getPage(pageKey, _pageSize);
       final isLastPage = newItems.length < _pageSize;
       if (isLastPage) {
         _pagingController.appendLastPage(newItems);

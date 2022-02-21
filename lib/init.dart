@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:vpapp/services/announcements.dart';
+import 'package:vpapp/services/announcement.dart';
 import 'package:vpapp/services/directus.dart';
 
 Future<void> init() async {
@@ -21,8 +21,8 @@ Future<void> _initServices() async {
   getIt.registerSingletonAsync<DirectusService>(
     () async => await DirectusService().init(),
   );
-  getIt.registerSingletonWithDependencies<AnnouncementsService>(
-    () => AnnouncementsService(directus: getIt.get<DirectusService>()),
+  getIt.registerSingletonWithDependencies<AnnouncementService>(
+    () => AnnouncementService(directus: getIt.get<DirectusService>()),
     dependsOn: [DirectusService],
   );
 

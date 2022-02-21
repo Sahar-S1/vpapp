@@ -1,11 +1,13 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:vpapp/utils/color.dart';
 
 class AnnouncementCategory {
   final int id;
   final String name;
-  final String color;
+  final Color color;
 
   AnnouncementCategory({
     required this.id,
@@ -16,7 +18,7 @@ class AnnouncementCategory {
   AnnouncementCategory copyWith({
     int? id,
     String? name,
-    String? color,
+    Color? color,
   }) {
     return AnnouncementCategory(
       id: id ?? this.id,
@@ -29,7 +31,7 @@ class AnnouncementCategory {
     return {
       'id': id,
       'name': name,
-      'color': color,
+      'color': colorToHex(color),
     };
   }
 
@@ -37,7 +39,7 @@ class AnnouncementCategory {
     return AnnouncementCategory(
       id: map['id']?.toInt() ?? 0,
       name: map['name'] ?? '',
-      color: map['color'] ?? '',
+      color: hexToColor(map['color']),
     );
   }
 

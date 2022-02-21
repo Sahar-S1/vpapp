@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:get_it_mixin/get_it_mixin.dart';
 import 'package:vpapp/components/common/html.dart';
 import 'package:vpapp/models/announcement.dart';
-import 'package:vpapp/services/announcements.dart';
+import 'package:vpapp/services/announcement.dart';
 
 class AnnouncementPage extends StatelessWidget with GetItMixin {
   static const routeName = '/announcements/:id';
@@ -17,7 +17,7 @@ class AnnouncementPage extends StatelessWidget with GetItMixin {
     var theme = Theme.of(context);
 
     return FutureBuilder<Announcement>(
-      future: get<AnnouncementsService>().getOne(id),
+      future: get<AnnouncementService>().getOne(id),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Scaffold(

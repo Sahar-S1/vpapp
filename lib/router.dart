@@ -20,9 +20,15 @@ final router = GoRouter(
     ),
     GoRoute(
       path: AnnouncementPage.routeName,
-      builder: (context, state) => AnnouncementPage(
-        id: int.parse(state.params['id'] ?? '-1'),
-      ),
+      builder: (context, state) {
+        String? id = state.params['id'];
+
+        if (id == null || int.tryParse(id) == null) {
+          return const AnnouncementsPage();
+        }
+
+        return AnnouncementPage(id: int.parse(id));
+      },
     ),
   ],
   debugLogDiagnostics: true,
