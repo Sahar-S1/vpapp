@@ -1,8 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:vpapp/pages/announcements.dart';
+import 'package:vpapp/pages/home.dart';
+
+class Link {
+  final String name;
+  final String link;
+  final bool push;
+
+  const Link({required this.name, required this.link, this.push = true});
+}
 
 class AppDrawer extends StatelessWidget {
+  static const List<Link> _links = [
+    Link(
+      name: 'Home',
+      link: HomePage.routeName,
+      push: false,
+    ),
+    Link(
+      name: 'Announcments',
+      link: AnnouncementsPage.routeName,
+    ),
+  ];
+
   const AppDrawer({Key? key}) : super(key: key);
 
   @override
@@ -14,26 +35,42 @@ class AppDrawer extends StatelessWidget {
         children: [
           DrawerHeader(
             decoration: BoxDecoration(
-              color: Theme.of(context).primaryColor,
+              color: theme.primaryColor,
             ),
             child: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 20),
               alignment: Alignment.center,
-              child: Text(
-                'Drawer',
-                style: theme.textTheme.displayMedium,
+              child: Image.network(
+                'https://vpt.edu.in/diploma/polytechnic/images/vp_logo.png',
               ),
             ),
           ),
-          ListTile(
-            leading: const Icon(Icons.announcement),
-            title: Text(
-              'Announcement',
-              style: theme.textTheme.titleLarge,
+          for (var link in _links)
+            ListTile(
+              title: Text(
+                link.name,
+                style: theme.textTheme.titleLarge,
+                textAlign: TextAlign.center,
+              ),
+              onTap: () {
+                if (link.push) {
+                  context.push(link.link);
+                } else {
+                  context.go(link.link);
+                }
+              },
             ),
-            trailing: const Icon(Icons.arrow_right_alt),
-            onTap: () {
-              context.push(AnnouncementsPage.routeName);
-            },
+          Align(
+            alignment: Alignment.center,
+            child: GestureDetector(
+              child: CircleAvatar(
+                backgroundColor: theme.primaryColor,
+                child: const Icon(Icons.arrow_back),
+              ),
+              onTap: () {
+                Navigator.of(context).pop();
+              },
+            ),
           ),
         ],
       ),
