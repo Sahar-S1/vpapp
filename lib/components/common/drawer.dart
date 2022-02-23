@@ -25,10 +25,12 @@ class AppDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
+            leading: const Icon(Icons.announcement),
             title: Text(
               'Announcement',
               style: theme.textTheme.titleLarge,
             ),
+            trailing: const Icon(Icons.arrow_right_alt),
             onTap: () {
               context.push(AnnouncementsPage.routeName);
             },

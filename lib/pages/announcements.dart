@@ -10,7 +10,7 @@ class AnnouncementsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Annocements'),
+        title: const Text('Announcements'),
       ),
       body: AnnouncementsList(),
     );

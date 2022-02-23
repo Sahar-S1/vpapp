@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get_it_mixin/get_it_mixin.dart';
+import 'package:go_router/go_router.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:vpapp/components/announcements/announcement_card.dart';
 import 'package:vpapp/models/announcement.dart';
+import 'package:vpapp/pages/announcement.dart';
 import 'package:vpapp/services/announcement.dart';
 
 class AnnouncementsList extends StatefulWidget with GetItStatefulWidgetMixin {
@@ -52,8 +54,12 @@ class _AnnouncementsListState extends State<AnnouncementsList>
       child: PagedListView<int, Announcement>(
         pagingController: _pagingController,
         builderDelegate: PagedChildBuilderDelegate<Announcement>(
-          itemBuilder: (context, item, index) => AnnouncementCard(
-            announcement: item,
+          itemBuilder: (context, announcement, index) => InkWell(
+            onTap: () => context.push(
+              AnnouncementPage.routeName
+                  .replaceAll(':id', announcement.id.toString()),
+            ),
+            child: AnnouncementCard(announcement: announcement),
           ),
         ),
       ),

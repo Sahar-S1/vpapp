@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:get_it_mixin/get_it_mixin.dart';
+import 'package:vpapp/components/announcements/announcment_card_content.dart';
 import 'package:vpapp/components/common/html.dart';
 import 'package:vpapp/models/announcement.dart';
 import 'package:vpapp/services/announcement.dart';
@@ -55,13 +56,18 @@ class AnnouncementPage extends StatelessWidget with GetItMixin {
         final announcement = snapshot.data!;
         return Scaffold(
           appBar: AppBar(
-            title: Text(announcement.title),
+            title: const Text('Announcement'),
           ),
           body: SingleChildScrollView(
             child: Container(
               padding: const EdgeInsets.all(10.0),
-              child: Html(
-                data: announcement.description,
+              child: Card(
+                child: Column(
+                  children: [
+                    AnnouncementCardContent(announcement: announcement),
+                    Html(data: announcement.description),
+                  ],
+                ),
               ),
             ),
           ),
