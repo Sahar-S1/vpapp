@@ -41,7 +41,7 @@ class AppDrawer extends StatelessWidget {
               margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 20),
               alignment: Alignment.center,
               child: Image.network(
-                'https://vpt.edu.in/diploma/polytechnic/images/vp_logo.png',
+                'https://cms.vp.appsinfra.in/assets/1df44888-40db-41fe-a4f9-b42062954dd4',
               ),
             ),
           ),
