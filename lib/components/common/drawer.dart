@@ -1,6 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:vpapp/pages/announcements.dart';
+import 'package:vpapp/pages/clubs.dart';
 import 'package:vpapp/pages/home.dart';
 
 class Link {
@@ -22,6 +24,10 @@ class AppDrawer extends StatelessWidget {
       name: 'Announcments',
       link: AnnouncementsPage.routeName,
     ),
+    Link(
+      name: 'Clubs',
+      link: ClubsPage.routeName,
+    )
   ];
 
   const AppDrawer({Key? key}) : super(key: key);
@@ -40,8 +46,21 @@ class AppDrawer extends StatelessWidget {
             child: Container(
               margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 20),
               alignment: Alignment.center,
-              child: Image.network(
-                'https://vpt.edu.in/diploma/polytechnic/images/vp_logo.png',
+              child: CachedNetworkImage(
+                imageUrl:
+                    'https://vpt.edu.in/diploma/polytechnic/images/vp_logo.png',
+                progressIndicatorBuilder: (context, url, downloadProgress) {
+                  return Center(
+                    child: CircularProgressIndicator(
+                      value: downloadProgress.progress,
+                    ),
+                  );
+                },
+                errorWidget: (context, url, error) {
+                  return const Center(
+                    child: Icon(Icons.error),
+                  );
+                },
               ),
             ),
           ),
