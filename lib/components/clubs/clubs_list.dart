@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get_it_mixin/get_it_mixin.dart';
-import 'package:go_router/go_router.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:vpapp/components/clubs/club_card.dart';
 import 'package:vpapp/models/club.dart';
