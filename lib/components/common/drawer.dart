@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:vpapp/config.dart';
 import 'package:vpapp/pages/announcements.dart';
 import 'package:vpapp/pages/clubs.dart';
 import 'package:vpapp/pages/home.dart';
@@ -47,8 +48,7 @@ class AppDrawer extends StatelessWidget {
               margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 20),
               alignment: Alignment.center,
               child: CachedNetworkImage(
-                imageUrl:
-                    'https://vpt.edu.in/diploma/polytechnic/images/vp_logo.png',
+                imageUrl: AppConfig.logoUrl,
                 progressIndicatorBuilder: (context, url, downloadProgress) {
                   return Center(
                     child: CircularProgressIndicator(
