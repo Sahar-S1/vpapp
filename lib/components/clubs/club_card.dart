@@ -10,6 +10,8 @@ class ClubCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
+    var isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
 
     return Card(
       shape: RoundedRectangleBorder(
@@ -28,7 +30,7 @@ class ClubCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Expanded(
-                flex: 7,
+                flex: isLandscape ? 9 : 8,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -45,7 +47,7 @@ class ClubCard extends StatelessWidget {
                 ),
               ),
               Expanded(
-                flex: 3,
+                flex: isLandscape ? 1 : 2,
                 child: CachedNetworkImage(
                   imageUrl: club.logoUrl,
                   progressIndicatorBuilder: (context, url, downloadProgress) {
