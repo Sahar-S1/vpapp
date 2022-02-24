@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:dio_cache_interceptor_hive_store/dio_cache_interceptor_hive_store.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
+import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:vpapp/config.dart';
 
@@ -47,16 +48,18 @@ class DirectusService {
     // Add Cache Interceptor
     dio.interceptors.add(DioCacheInterceptor(options: options));
 
-    // Initialize Cookie Jar
-    Directory appDocDir = await getApplicationDocumentsDirectory();
-    String appDocPath = appDocDir.path;
-    cj = PersistCookieJar(
-      persistSession: true,
-      ignoreExpires: true,
-      storage: FileStorage('$appDocPath/.cookies/'),
-    );
+    if (!kIsWeb) {
+      // Initialize Cookie Jar
+      Directory appDocDir = await getApplicationDocumentsDirectory();
+      String appDocPath = appDocDir.path;
+      cj = PersistCookieJar(
+        persistSession: true,
+        ignoreExpires: true,
+        storage: FileStorage('$appDocPath/.cookies/'),
+      );
 
-    // Add Cookies Interceptor
-    dio.interceptors.add(CookieManager(cj));
+      // Add Cookies Interceptor
+      dio.interceptors.add(CookieManager(cj));
+    }
   }
 }
