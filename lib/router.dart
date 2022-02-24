@@ -43,5 +43,6 @@ final router = GoRouter(
       builder: (context, state) => const ClubsPage(),
     ),
   ],
+  urlPathStrategy: UrlPathStrategy.path,
   debugLogDiagnostics: true,
 );
