@@ -28,7 +28,7 @@ class AppDrawer extends StatelessWidget {
     Link(
       name: 'Clubs',
       link: ClubsPage.routeName,
-    )
+    ),
   ];
 
   const AppDrawer({Key? key}) : super(key: key);
@@ -79,6 +79,7 @@ class AppDrawer extends StatelessWidget {
                 }
               },
             ),
+          const SizedBox(height: 40),
           Align(
             alignment: Alignment.center,
             child: GestureDetector(
