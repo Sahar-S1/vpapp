@@ -55,9 +55,9 @@ class _AnnouncementsListState extends State<AnnouncementsList>
         pagingController: _pagingController,
         builderDelegate: PagedChildBuilderDelegate<Announcement>(
           itemBuilder: (context, announcement, index) => InkWell(
-            onTap: () => context.push(
-              AnnouncementPage.routeName
-                  .replaceAll(':id', announcement.id.toString()),
+            onTap: () => context.goNamed(
+              AnnouncementPage.routeName,
+              params: {'id': announcement.id.toString()},
             ),
             child: AnnouncementCard(announcement: announcement),
           ),

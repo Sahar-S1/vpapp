@@ -7,40 +7,37 @@ import 'package:vpapp/pages/home.dart';
 final router = GoRouter(
   initialLocation: '/',
   routes: [
-    // Initial Page
     GoRoute(
       path: '/',
-      redirect: (_) => HomePage.routeName,
-    ),
-
-    // Home Page
-    GoRoute(
-      path: HomePage.routeName,
+      name: HomePage.routeName,
       builder: (context, state) => const HomePage(),
-    ),
+      routes: [
+        GoRoute(
+          path: 'announcements',
+          name: AnnouncementsPage.routeName,
+          builder: (context, state) => const AnnouncementsPage(),
+          routes: [
+            GoRoute(
+              path: ':id',
+              name: AnnouncementPage.routeName,
+              builder: (context, state) {
+                String? id = state.params['id'];
 
-    // Announcments Pages
-    GoRoute(
-      path: AnnouncementsPage.routeName,
-      builder: (context, state) => const AnnouncementsPage(),
-    ),
-    GoRoute(
-      path: AnnouncementPage.routeName,
-      builder: (context, state) {
-        String? id = state.params['id'];
+                if (id == null || int.tryParse(id) == null) {
+                  return const AnnouncementsPage();
+                }
 
-        if (id == null || int.tryParse(id) == null) {
-          return const AnnouncementsPage();
-        }
-
-        return AnnouncementPage(id: int.parse(id));
-      },
-    ),
-
-    // Clubs Pages
-    GoRoute(
-      path: ClubsPage.routeName,
-      builder: (context, state) => const ClubsPage(),
+                return AnnouncementPage(id: int.parse(id));
+              },
+            ),
+          ],
+        ),
+        GoRoute(
+          path: 'clubs',
+          name: ClubsPage.routeName,
+          builder: (context, state) => const ClubsPage(),
+        ),
+      ],
     ),
   ],
   urlPathStrategy: UrlPathStrategy.path,

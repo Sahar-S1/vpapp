@@ -4,10 +4,11 @@ import 'package:get_it_mixin/get_it_mixin.dart';
 import 'package:vpapp/components/announcements/announcment_card_content.dart';
 import 'package:vpapp/components/common/html.dart';
 import 'package:vpapp/models/announcement.dart';
+import 'package:vpapp/pages/home.dart';
 import 'package:vpapp/services/announcement.dart';
 
 class AnnouncementPage extends StatelessWidget with GetItMixin {
-  static const routeName = '/announcements/:id';
+  static const routeName = 'announcement';
 
   final int id;
 
@@ -43,7 +44,7 @@ class AnnouncementPage extends StatelessWidget with GetItMixin {
                         ?.apply(color: theme.errorColor),
                   ),
                   TextButton(
-                    onPressed: () => context.go('/'),
+                    onPressed: () => context.goNamed(HomePage.routeName),
                     child: const Text('Home'),
                   ),
                 ],

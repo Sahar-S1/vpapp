@@ -9,9 +9,8 @@ import 'package:vpapp/pages/home.dart';
 class Link {
   final String name;
   final String link;
-  final bool push;
 
-  const Link({required this.name, required this.link, this.push = true});
+  const Link({required this.name, required this.link});
 }
 
 class AppDrawer extends StatelessWidget {
@@ -19,7 +18,6 @@ class AppDrawer extends StatelessWidget {
     Link(
       name: 'Home',
       link: HomePage.routeName,
-      push: false,
     ),
     Link(
       name: 'Announcments',
@@ -71,13 +69,7 @@ class AppDrawer extends StatelessWidget {
                 style: theme.textTheme.titleLarge,
                 textAlign: TextAlign.center,
               ),
-              onTap: () {
-                if (link.push) {
-                  context.push(link.link);
-                } else {
-                  context.go(link.link);
-                }
-              },
+              onTap: () => context.goNamed(link.link),
             ),
           const SizedBox(height: 40),
           Align(
