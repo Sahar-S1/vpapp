@@ -3,6 +3,8 @@ import 'package:vpapp/pages/announcement.dart';
 import 'package:vpapp/pages/announcements.dart';
 import 'package:vpapp/pages/clubs.dart';
 import 'package:vpapp/pages/home.dart';
+import 'package:vpapp/pages/info.dart';
+import 'package:vpapp/pages/info_list.dart';
 
 final router = GoRouter(
   initialLocation: '/',
@@ -37,6 +39,26 @@ final router = GoRouter(
           name: ClubsPage.routeName,
           builder: (context, state) => const ClubsPage(),
         ),
+        GoRoute(
+          path: 'info',
+          name: InfoListPage.routeName,
+          builder: (context, state) => const InfoListPage(),
+          routes: [
+            GoRoute(
+              path: ':id',
+              name: InfoPage.routeName,
+              builder: (context, state) {
+                String? id = state.params['id'];
+
+                if (id == null || int.tryParse(id) == null) {
+                  return const InfoListPage();
+                }
+
+                return InfoPage(id: int.parse(id));
+              },
+            )
+          ],
+        )
       ],
     ),
   ],

@@ -4,6 +4,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:vpapp/services/announcement.dart';
 import 'package:vpapp/services/club.dart';
 import 'package:vpapp/services/directus.dart';
+import 'package:vpapp/services/info.dart';
 
 Future<void> init() async {
   // Flutter Initializations
@@ -28,6 +29,10 @@ Future<void> _initServices() async {
   );
   getIt.registerSingletonWithDependencies<ClubService>(
     () => ClubService(directus: getIt.get<DirectusService>()),
+    dependsOn: [DirectusService],
+  );
+  getIt.registerSingletonWithDependencies<InfoService>(
+    () => InfoService(directus: getIt.get<DirectusService>()),
     dependsOn: [DirectusService],
   );
 
