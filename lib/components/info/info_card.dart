@@ -14,9 +14,14 @@ class InfoCard extends StatelessWidget {
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8.0),
+        side: BorderSide(
+          color: theme.primaryColor,
+          style: BorderStyle.solid,
+          width: 1.0,
+        ),
       ),
       margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
-      color: theme.splashColor,
+      elevation: 4,
       child: Container(
         padding: const EdgeInsets.all(16.0),
         child: IntrinsicHeight(

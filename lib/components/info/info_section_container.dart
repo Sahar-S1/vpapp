@@ -13,10 +13,27 @@ class InfoSectionContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
 
-    var decorationIcon = Icon(
-      Icons.menu_rounded,
-      size: theme.textTheme.bodySmall?.fontSize,
-    );
+    Widget getLine(double width, double thickness) => SizedBox(
+          width: width,
+          height: thickness,
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              color: theme.textTheme.titleLarge?.color,
+            ),
+          ),
+        );
+
+    Widget getDecorationIcon(CrossAxisAlignment alignment) => Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: alignment,
+          children: [
+            getLine(10, 1),
+            const SizedBox(height: 1.5),
+            getLine(15, 1),
+            const SizedBox(height: 1.5),
+            getLine(10, 1),
+          ],
+        );
 
     return Container(
       padding: const EdgeInsets.all(8.0),
@@ -26,12 +43,14 @@ class InfoSectionContainer extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              decorationIcon,
+              getDecorationIcon(CrossAxisAlignment.end),
+              const SizedBox(width: 4),
               Text(
                 section.title,
                 style: theme.textTheme.titleLarge,
               ),
-              decorationIcon,
+              const SizedBox(width: 4),
+              getDecorationIcon(CrossAxisAlignment.start),
             ],
           ),
           Html(
