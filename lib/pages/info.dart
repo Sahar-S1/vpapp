@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:get_it_mixin/get_it_mixin.dart';
-import 'package:vpapp/components/info/info_section_container.dart';
 import 'package:vpapp/components/info/info_sections_column.dart';
 import 'package:vpapp/models/info.dart';
 import 'package:vpapp/pages/home.dart';

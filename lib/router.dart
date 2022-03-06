@@ -56,9 +56,9 @@ final router = GoRouter(
 
                 return InfoPage(id: int.parse(id));
               },
-            )
+            ),
           ],
-        )
+        ),
       ],
     ),
   ],
