@@ -4,14 +4,14 @@ class AppTheme {
   static ThemeData? getTheme({bool isInitial = false}) {
     ThemeData? _initialTheme = isInitial ? null : getTheme(isInitial: true);
     return ThemeData(
-      colorSchemeSeed: isInitial ? Colors.green : null,
+      colorSchemeSeed: Colors.green,
       fontFamily: 'OpenSans',
       appBarTheme: _initialTheme?.appBarTheme.copyWith(
         elevation: 0,
         backgroundColor: Colors.transparent,
         foregroundColor: _initialTheme.primaryColor,
       ),
-      primaryColor: _initialTheme?.primaryColor,
+    ).copyWith(
       colorScheme: _initialTheme?.colorScheme.copyWith(
         primaryContainer: Colors.green,
       ),
