@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vpapp/components/common/page_template.dart';
 import 'package:vpapp/components/info/info_list.dart';
 
 class InfoListPage extends StatelessWidget {
@@ -9,10 +10,11 @@ class InfoListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Info'),
+      appBar: AppBar(),
+      body: PageTemplate(
+        header: 'Info',
+        child: InfoList(),
       ),
-      body: InfoList(),
     );
   }
 }

@@ -19,7 +19,9 @@ class InfoSectionsColumn extends StatelessWidget {
               i,
               InfoSectionContainer(
                 section: e,
-                bgColor: i % 2 == 0 ? theme.backgroundColor : theme.splashColor,
+                bgColor: i % 2 == 0
+                    ? theme.colorScheme.surface
+                    : theme.colorScheme.surfaceVariant,
               ),
             ),
           )

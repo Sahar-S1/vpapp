@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:get_it_mixin/get_it_mixin.dart';
+import 'package:vpapp/components/common/page_template.dart';
 import 'package:vpapp/components/info/info_sections_column.dart';
 import 'package:vpapp/models/info.dart';
 import 'package:vpapp/pages/home.dart';
@@ -55,11 +56,12 @@ class InfoPage extends StatelessWidget with GetItMixin {
         assert(snapshot.hasData);
         final info = snapshot.data!;
         return Scaffold(
-          appBar: AppBar(
-            title: const Text('Info'),
-          ),
-          body: SingleChildScrollView(
-            child: InfoSectionsColumn(info: info),
+          appBar: AppBar(),
+          body: PageTemplate(
+            header: info.name,
+            child: SingleChildScrollView(
+              child: InfoSectionsColumn(info: info),
+            ),
           ),
         );
       },

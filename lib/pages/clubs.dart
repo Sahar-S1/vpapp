@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vpapp/components/clubs/clubs_list.dart';
+import 'package:vpapp/components/common/page_template.dart';
 
 class ClubsPage extends StatelessWidget {
   static const routeName = 'clubs';
@@ -9,10 +10,11 @@ class ClubsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Clubs'),
+      appBar: AppBar(),
+      body: PageTemplate(
+        header: 'Clubs',
+        child: ClubsList(),
       ),
-      body: ClubsList(),
     );
   }
 }

@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:get_it_mixin/get_it_mixin.dart';
 import 'package:vpapp/components/announcements/announcment_card_content.dart';
 import 'package:vpapp/components/common/html.dart';
+import 'package:vpapp/components/common/page_template.dart';
 import 'package:vpapp/models/announcement.dart';
 import 'package:vpapp/pages/home.dart';
 import 'package:vpapp/services/announcement.dart';
@@ -59,16 +60,19 @@ class AnnouncementPage extends StatelessWidget with GetItMixin {
           appBar: AppBar(
             title: const Text('Announcement'),
           ),
-          body: SingleChildScrollView(
-            child: Container(
-              padding: const EdgeInsets.all(10.0),
-              child: Card(
-                child: Column(
-                  children: [
-                    AnnouncementCardContent(announcement: announcement),
-                    Html(data: announcement.description),
-                  ],
-                ),
+          body: PageTemplate(
+            child: Card(
+              child: Column(
+                children: [
+                  AnnouncementCardContent(announcement: announcement),
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Html(
+                        data: announcement.description,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
