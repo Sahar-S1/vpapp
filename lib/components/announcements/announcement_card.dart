@@ -19,7 +19,6 @@ class AnnouncementCard extends StatelessWidget {
           style: BorderStyle.solid,
         ),
       ),
-      margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
       child: AnnouncementCardContent(announcement: announcement),
     );
   }

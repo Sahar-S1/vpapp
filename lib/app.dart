@@ -12,9 +12,9 @@ class App extends StatelessWidget {
       // Title
       title: AppConfig.title,
       // Theme
-      theme: AppTheme.theme,
-      darkTheme: AppTheme.darkTheme,
-      themeMode: AppTheme.themeMode,
+      theme: AppTheme.getTheme(),
+      darkTheme: AppTheme.getDarkTheme(),
+      themeMode: AppTheme.getThemeMode(),
       // Router
       routeInformationParser: router.routeInformationParser,
       routerDelegate: router.routerDelegate,

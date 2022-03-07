@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:vpapp/components/common/drawer.dart';
+import 'package:vpapp/components/common/page_template.dart';
 import 'package:vpapp/config.dart';
 
 class HomePage extends StatelessWidget {
@@ -11,13 +12,12 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(AppConfig.title),
-      ),
-      body: Center(
+      appBar: AppBar(),
+      drawer: const AppDrawer(),
+      body: PageTemplate(
+        header: AppConfig.title,
         child: Container(),
       ),
-      drawer: const AppDrawer(),
     );
   }
 }

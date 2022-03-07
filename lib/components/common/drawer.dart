@@ -6,6 +6,7 @@ import 'package:vpapp/pages/announcements.dart';
 import 'package:vpapp/pages/blogs.dart';
 import 'package:vpapp/pages/clubs.dart';
 import 'package:vpapp/pages/home.dart';
+import 'package:vpapp/pages/info_list.dart';
 
 class Link {
   final String name;
@@ -31,6 +32,10 @@ class AppDrawer extends StatelessWidget {
     Link(
       name: 'Blogs',
       link: BlogsPage.routeName,
+    ),
+    Link(
+      name: 'Info',
+      link: InfoListPage.routeName,
     ),
   ];
 

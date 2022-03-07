@@ -1,26 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:get_it_mixin/get_it_mixin.dart';
-import 'package:vpapp/components/announcements/announcment_card_content.dart';
-import 'package:vpapp/components/common/html.dart';
 import 'package:vpapp/components/common/page_template.dart';
-import 'package:vpapp/models/announcement.dart';
+import 'package:vpapp/components/info/info_sections_column.dart';
+import 'package:vpapp/models/info.dart';
 import 'package:vpapp/pages/home.dart';
-import 'package:vpapp/services/announcement.dart';
+import 'package:vpapp/services/info.dart';
 
-class AnnouncementPage extends StatelessWidget with GetItMixin {
-  static const routeName = 'announcement';
+class InfoPage extends StatelessWidget with GetItMixin {
+  static const routeName = 'info';
 
   final int id;
 
-  AnnouncementPage({Key? key, required this.id}) : super(key: key);
+  InfoPage({Key? key, required this.id}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
 
-    return FutureBuilder<Announcement>(
-      future: get<AnnouncementService>().getOne(id),
+    return FutureBuilder<Info>(
+      future: get<InfoService>().getOne(id),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Scaffold(
@@ -55,25 +54,13 @@ class AnnouncementPage extends StatelessWidget with GetItMixin {
         }
 
         assert(snapshot.hasData);
-        final announcement = snapshot.data!;
+        final info = snapshot.data!;
         return Scaffold(
-          appBar: AppBar(
-            title: const Text('Announcement'),
-          ),
+          appBar: AppBar(),
           body: PageTemplate(
-            child: Card(
-              child: Column(
-                children: [
-                  AnnouncementCardContent(announcement: announcement),
-                  Expanded(
-                    child: SingleChildScrollView(
-                      child: Html(
-                        data: announcement.description,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+            header: info.name,
+            child: SingleChildScrollView(
+              child: InfoSectionsColumn(info: info),
             ),
           ),
         );

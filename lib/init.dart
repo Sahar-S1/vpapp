@@ -5,6 +5,7 @@ import 'package:vpapp/services/announcement.dart';
 import 'package:vpapp/services/blog.dart';
 import 'package:vpapp/services/club.dart';
 import 'package:vpapp/services/directus.dart';
+import 'package:vpapp/services/info.dart';
 
 Future<void> init() async {
   // Flutter Initializations
@@ -33,6 +34,10 @@ Future<void> _initServices() async {
   );
   getIt.registerSingletonWithDependencies<BlogService>(
     () => BlogService(directus: getIt.get<DirectusService>()),
+    dependsOn: [DirectusService],
+  );
+  getIt.registerSingletonWithDependencies<InfoService>(
+    () => InfoService(directus: getIt.get<DirectusService>()),
     dependsOn: [DirectusService],
   );
 
