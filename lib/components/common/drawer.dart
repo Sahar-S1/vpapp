@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:vpapp/config.dart';
 import 'package:vpapp/pages/announcements.dart';
+import 'package:vpapp/pages/blogs.dart';
 import 'package:vpapp/pages/clubs.dart';
 import 'package:vpapp/pages/home.dart';
 
@@ -26,6 +27,10 @@ class AppDrawer extends StatelessWidget {
     Link(
       name: 'Clubs',
       link: ClubsPage.routeName,
+    ),
+    Link(
+      name: 'Blogs',
+      link: BlogsPage.routeName,
     ),
   ];
 
