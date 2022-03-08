@@ -1,15 +1,20 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
+import 'package:intl/intl.dart';
+
 import 'package:vpapp/config.dart';
 
 class Blog {
+  static final DateFormat _datePublishedFormat = DateFormat('yyyy-MM-dd');
+
   final int id;
   final String title;
   final String author;
   final String content;
   final String image;
   final List<String> tags;
+  final DateTime datePublished;
 
   String get imageUrl {
     return '${AppConfig.directusAssetsEndpoint}/$image';
@@ -22,6 +27,7 @@ class Blog {
     required this.content,
     required this.image,
     required this.tags,
+    required this.datePublished,
   });
 
   Blog copyWith({
@@ -31,6 +37,7 @@ class Blog {
     String? content,
     String? image,
     List<String>? tags,
+    DateTime? datePublished,
   }) {
     return Blog(
       id: id ?? this.id,
@@ -39,6 +46,7 @@ class Blog {
       content: content ?? this.content,
       image: image ?? this.image,
       tags: tags ?? this.tags,
+      datePublished: datePublished ?? this.datePublished,
     );
   }
 
@@ -50,6 +58,7 @@ class Blog {
       'content': content,
       'image': image,
       'tags': tags,
+      'date_published': _datePublishedFormat.format(datePublished),
     };
   }
 
@@ -61,6 +70,7 @@ class Blog {
       content: map['content'] ?? '',
       image: map['image'] ?? '',
       tags: List<String>.from(map['tags']),
+      datePublished: _datePublishedFormat.parse(map['date_published']),
     );
   }
 
@@ -70,7 +80,7 @@ class Blog {
 
   @override
   String toString() {
-    return 'Blog(id: $id, title: $title, author: $author, content: $content, image: $image, tags: $tags)';
+    return 'Blog(id: $id, title: $title, author: $author, content: $content, image: $image, tags: $tags, datePublished: $datePublished)';
   }
 
   @override
@@ -83,7 +93,8 @@ class Blog {
         other.author == author &&
         other.content == content &&
         other.image == image &&
-        listEquals(other.tags, tags);
+        listEquals(other.tags, tags) &&
+        other.datePublished == datePublished;
   }
 
   @override
@@ -93,6 +104,7 @@ class Blog {
         author.hashCode ^
         content.hashCode ^
         image.hashCode ^
-        tags.hashCode;
+        tags.hashCode ^
+        datePublished.hashCode;
   }
 }

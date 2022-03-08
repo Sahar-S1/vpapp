@@ -70,7 +70,7 @@ class BlogCard extends StatelessWidget {
                 const SizedBox(height: 24),
                 Text(
                   'Date Published: ' +
-                      DateFormat.yMMMd().format(DateTime.now()),
+                      DateFormat.yMMMd().format(blog.datePublished),
                   style: theme.textTheme.titleSmall,
                 ),
               ],
