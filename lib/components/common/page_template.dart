@@ -39,7 +39,7 @@ class PageTemplate extends StatelessWidget {
               ),
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.vertical(
-                  top: Radius.circular(20.0),
+                  top: Radius.circular(12.0),
                 ),
                 color: theme.colorScheme.primaryContainer,
               ),
