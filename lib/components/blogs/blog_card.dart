@@ -1,5 +1,7 @@
 // ignore_for_file: avoid_unnecessary_containers
 
+import 'dart:ui';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -25,13 +27,23 @@ class BlogCard extends StatelessWidget {
       ),
       margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
       child: Container(
-        padding: const EdgeInsets.all(10.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             CachedNetworkImage(
               imageUrl: blog.imageUrl,
+              imageBuilder: (context, imageProvider) => Container(
+                height: 120,
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.vertical(
+                    top: Radius.circular(8.0),
+                  ),
+                  image: DecorationImage(
+                    image: imageProvider,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
               progressIndicatorBuilder: (context, url, downloadProgress) {
                 return Center(
                   child: CircularProgressIndicator(
@@ -45,18 +57,29 @@ class BlogCard extends StatelessWidget {
                 );
               },
             ),
-            Text(
-              blog.title,
-              style: theme.textTheme.titleLarge,
-            ),
-            Text(
-              blog.author,
-              style: theme.textTheme.titleMedium,
-            ),
-            const SizedBox(height: 24),
-            Text(
-              'Date Published: ' + DateFormat.yMMMd().format(DateTime.now()),
-              style: theme.textTheme.titleSmall,
+            Container(
+              padding: const EdgeInsets.all(12.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text(
+                    blog.title,
+                    style: theme.textTheme.titleLarge,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  Text(
+                    blog.author,
+                    style: theme.textTheme.titleMedium,
+                  ),
+                  const SizedBox(height: 24),
+                  Text(
+                    'Date Published: ' +
+                        DateFormat.yMMMd().format(DateTime.now()),
+                    style: theme.textTheme.titleSmall,
+                  ),
+                ],
+              ),
             ),
           ],
         ),
