@@ -5,12 +5,15 @@ class AnnouncementService extends ItemService<Announcement> {
   AnnouncementService({required directus}) : super(directus: directus);
 
   @override
+  String get name => 'announcement';
+
+  @override
+  List<String> get sort => ['sort', '-date_published'];
+
+  @override
   List<String> get fields => ['*.*'];
 
   @override
   Announcement Function(Map<String, dynamic>) get fromMap =>
       Announcement.fromMap;
-
-  @override
-  String get name => 'announcement';
 }

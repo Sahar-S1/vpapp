@@ -2,6 +2,7 @@ import 'package:vpapp/services/directus.dart';
 
 abstract class ItemService<I> {
   String get name;
+  List<String> get sort;
   List<String> get fields;
   I Function(Map<String, dynamic>) get fromMap;
 
@@ -41,6 +42,7 @@ abstract class ItemService<I> {
         'fields': fields,
         'page': page,
         'limit': pageSize,
+        'sort': sort,
       },
     );
 
@@ -52,6 +54,7 @@ abstract class ItemService<I> {
       endpoint,
       queryParameters: {
         'fields': fields,
+        'sort': sort,
       },
     );
 
