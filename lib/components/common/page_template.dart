@@ -11,42 +11,44 @@ class PageTemplate extends StatelessWidget {
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
 
-    return Container(
-      padding: const EdgeInsets.all(0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          if (header != null)
-            Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Text(
-                header ?? '',
-                style: theme.textTheme.headlineMedium?.copyWith(
-                  color: theme.appBarTheme.foregroundColor,
+    return SafeArea(
+      child: Container(
+        padding: const EdgeInsets.all(0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            if (header != null)
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  header ?? '',
+                  style: theme.textTheme.headlineMedium?.copyWith(
+                    color: theme.appBarTheme.foregroundColor,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-                textAlign: TextAlign.center,
+              ),
+            if (header != null) const SizedBox(height: 12),
+            Expanded(
+              flex: 1,
+              child: Container(
+                padding: const EdgeInsets.only(
+                  top: 24,
+                  left: 16,
+                  right: 16,
+                  bottom: 0,
+                ),
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.vertical(
+                    top: Radius.circular(12.0),
+                  ),
+                  color: theme.colorScheme.primaryContainer,
+                ),
+                child: child,
               ),
             ),
-          if (header != null) const SizedBox(height: 12),
-          Expanded(
-            flex: 1,
-            child: Container(
-              padding: const EdgeInsets.only(
-                top: 24,
-                left: 16,
-                right: 16,
-                bottom: 0,
-              ),
-              decoration: BoxDecoration(
-                borderRadius: const BorderRadius.vertical(
-                  top: Radius.circular(12.0),
-                ),
-                color: theme.colorScheme.primaryContainer,
-              ),
-              child: child,
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
