@@ -29,24 +29,24 @@ class _PageTemplateState extends State<PageTemplate> {
 
     return widget.parentBuilder(
       title: appBarTitle,
-      child: SafeArea(
-        child: SlidingUpPanel(
-          controller: panelController,
-          onPanelOpened: () => setState(() {}),
-          onPanelClosed: () => setState(() {}),
-          backdropEnabled: true,
-          backdropOpacity: 0.1,
-          parallaxEnabled: true,
-          parallaxOffset: .5,
-          minHeight: .7 * MediaQuery.of(context).size.height,
-          maxHeight: .9 * MediaQuery.of(context).size.height,
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(12.0)),
-          isDraggable: widget.header != null,
-          defaultPanelState:
-              widget.header == null ? PanelState.OPEN : PanelState.CLOSED,
-          body: isOpen
-              ? null
-              : Padding(
+      child: SlidingUpPanel(
+        controller: panelController,
+        onPanelOpened: () => setState(() {}),
+        onPanelClosed: () => setState(() {}),
+        backdropEnabled: true,
+        backdropOpacity: 0.1,
+        parallaxEnabled: true,
+        parallaxOffset: .5,
+        minHeight: .7 * MediaQuery.of(context).size.height,
+        maxHeight: .9 * MediaQuery.of(context).size.height,
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(12.0)),
+        isDraggable: widget.header != null,
+        defaultPanelState:
+            widget.header == null ? PanelState.OPEN : PanelState.CLOSED,
+        body: isOpen
+            ? null
+            : SafeArea(
+                child: Padding(
                   padding: const EdgeInsets.all(28.0),
                   child: Text(
                     widget.header ?? '',
@@ -56,7 +56,9 @@ class _PageTemplateState extends State<PageTemplate> {
                     textAlign: TextAlign.center,
                   ),
                 ),
-          panelBuilder: (sc) => Container(
+              ),
+        panelBuilder: (sc) => SafeArea(
+          child: Container(
             padding: const EdgeInsets.only(
               top: 0,
               left: 16,
