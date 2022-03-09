@@ -8,7 +8,10 @@ import 'package:vpapp/pages/announcement.dart';
 import 'package:vpapp/services/announcement.dart';
 
 class AnnouncementsList extends StatefulWidget with GetItStatefulWidgetMixin {
-  AnnouncementsList({Key? key}) : super(key: key);
+  final ScrollController scrollController;
+
+  AnnouncementsList({Key? key, required this.scrollController})
+      : super(key: key);
 
   @override
   _AnnouncementsListState createState() => _AnnouncementsListState();
@@ -52,6 +55,7 @@ class _AnnouncementsListState extends State<AnnouncementsList>
         () => _pagingController.refresh(),
       ),
       child: PagedListView<int, Announcement>(
+        scrollController: widget.scrollController,
         pagingController: _pagingController,
         builderDelegate: PagedChildBuilderDelegate<Announcement>(
           itemBuilder: (context, announcement, index) => InkWell(

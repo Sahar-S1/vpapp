@@ -6,7 +6,9 @@ import 'package:vpapp/models/blog.dart';
 import 'package:vpapp/services/blog.dart';
 
 class BlogsList extends StatefulWidget with GetItStatefulWidgetMixin {
-  BlogsList({Key? key}) : super(key: key);
+  final ScrollController scrollController;
+
+  BlogsList({Key? key, required this.scrollController}) : super(key: key);
 
   @override
   _BlogsListState createState() => _BlogsListState();
@@ -48,6 +50,7 @@ class _BlogsListState extends State<BlogsList> with GetItStateMixin {
         () => _pagingController.refresh(),
       ),
       child: PagedListView<int, Blog>(
+        scrollController: widget.scrollController,
         pagingController: _pagingController,
         builderDelegate: PagedChildBuilderDelegate<Blog>(
           itemBuilder: (context, blog, index) => InkWell(

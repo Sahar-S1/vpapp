@@ -11,13 +11,16 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      drawer: const AppDrawer(),
-      body: PageTemplate(
-        header: AppConfig.title,
-        child: Container(),
+    return PageTemplate(
+      header: AppConfig.title,
+      parentBuilder: ({required child, required title}) => Scaffold(
+        appBar: AppBar(
+          title: Text(title),
+        ),
+        drawer: const AppDrawer(),
+        body: child,
       ),
+      childBuilder: (sc) => Container(),
     );
   }
 }

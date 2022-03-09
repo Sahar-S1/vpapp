@@ -55,13 +55,17 @@ class InfoPage extends StatelessWidget with GetItMixin {
 
         assert(snapshot.hasData);
         final info = snapshot.data!;
-        return Scaffold(
-          appBar: AppBar(),
-          body: PageTemplate(
-            header: info.name,
-            child: SingleChildScrollView(
-              child: InfoSectionsColumn(info: info),
+        return PageTemplate(
+          header: info.name,
+          parentBuilder: ({required child, required title}) => Scaffold(
+            appBar: AppBar(
+              title: Text(title),
             ),
+            body: child,
+          ),
+          childBuilder: (sc) => SingleChildScrollView(
+            controller: sc,
+            child: InfoSectionsColumn(info: info),
           ),
         );
       },

@@ -9,12 +9,15 @@ class BlogsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: PageTemplate(
-        header: 'Blogs',
-        child: BlogsList(),
+    return PageTemplate(
+      header: 'Blogs',
+      parentBuilder: ({required child, required title}) => Scaffold(
+        appBar: AppBar(
+          title: Text(title),
+        ),
+        body: child,
       ),
+      childBuilder: (sc) => BlogsList(scrollController: sc),
     );
   }
 }

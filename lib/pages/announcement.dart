@@ -56,24 +56,26 @@ class AnnouncementPage extends StatelessWidget with GetItMixin {
 
         assert(snapshot.hasData);
         final announcement = snapshot.data!;
-        return Scaffold(
-          appBar: AppBar(
-            title: const Text('Announcement'),
+        return PageTemplate(
+          parentBuilder: ({required child, required title}) => Scaffold(
+            appBar: AppBar(
+              title: const Text('Announcement'),
+            ),
+            body: child,
           ),
-          body: PageTemplate(
-            child: Card(
-              child: Column(
-                children: [
-                  AnnouncementCardContent(announcement: announcement),
-                  Expanded(
-                    child: SingleChildScrollView(
-                      child: Html(
-                        data: announcement.description,
-                      ),
+          childBuilder: (sc) => Card(
+            child: Column(
+              children: [
+                AnnouncementCardContent(announcement: announcement),
+                Expanded(
+                  child: SingleChildScrollView(
+                    controller: sc,
+                    child: Html(
+                      data: announcement.description,
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         );

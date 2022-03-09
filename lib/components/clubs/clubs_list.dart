@@ -6,7 +6,9 @@ import 'package:vpapp/models/club.dart';
 import 'package:vpapp/services/club.dart';
 
 class ClubsList extends StatefulWidget with GetItStatefulWidgetMixin {
-  ClubsList({Key? key}) : super(key: key);
+  final ScrollController scrollController;
+
+  ClubsList({Key? key, required this.scrollController}) : super(key: key);
 
   @override
   _ClubsListState createState() => _ClubsListState();
@@ -48,6 +50,7 @@ class _ClubsListState extends State<ClubsList> with GetItStateMixin {
         () => _pagingController.refresh(),
       ),
       child: PagedListView<int, Club>(
+        scrollController: widget.scrollController,
         pagingController: _pagingController,
         builderDelegate: PagedChildBuilderDelegate<Club>(
           itemBuilder: (context, club, index) => InkWell(

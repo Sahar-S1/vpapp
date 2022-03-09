@@ -9,12 +9,15 @@ class InfoListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: PageTemplate(
-        header: 'Info',
-        child: InfoList(),
+    return PageTemplate(
+      header: 'Info',
+      parentBuilder: ({required child, required title}) => Scaffold(
+        appBar: AppBar(
+          title: Text(title),
+        ),
+        body: child,
       ),
+      childBuilder: (sc) => InfoList(scrollController: sc),
     );
   }
 }

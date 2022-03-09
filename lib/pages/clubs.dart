@@ -9,12 +9,15 @@ class ClubsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: PageTemplate(
-        header: 'Clubs',
-        child: ClubsList(),
+    return PageTemplate(
+      header: 'Clubs',
+      parentBuilder: ({required child, required title}) => Scaffold(
+        appBar: AppBar(
+          title: Text(title),
+        ),
+        body: child,
       ),
+      childBuilder: (sc) => ClubsList(scrollController: sc),
     );
   }
 }

@@ -8,7 +8,9 @@ import 'package:vpapp/pages/info.dart';
 import 'package:vpapp/services/info.dart';
 
 class InfoList extends StatefulWidget with GetItStatefulWidgetMixin {
-  InfoList({Key? key}) : super(key: key);
+  final ScrollController scrollController;
+
+  InfoList({Key? key, required this.scrollController}) : super(key: key);
 
   @override
   _InfoListState createState() => _InfoListState();
@@ -50,6 +52,7 @@ class _InfoListState extends State<InfoList> with GetItStateMixin {
         () => _pagingController.refresh(),
       ),
       child: PagedListView<int, Info>(
+        scrollController: widget.scrollController,
         pagingController: _pagingController,
         builderDelegate: PagedChildBuilderDelegate<Info>(
           itemBuilder: (context, info, index) => InkWell(
