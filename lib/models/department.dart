@@ -1,16 +1,24 @@
 import 'dart:convert';
 
+import 'package:vpapp/config.dart';
+
 class Department {
   final String name;
   final String vision;
   final String mission;
   final String outcomes;
+  final String logo;
+
+  String get logoUrl {
+    return '${AppConfig.directusAssetsEndpoint}/$logo';
+  }
 
   Department({
     required this.name,
     required this.vision,
     required this.mission,
     required this.outcomes,
+    required this.logo,
   });
 
   Department copyWith({
@@ -18,12 +26,14 @@ class Department {
     String? vision,
     String? mission,
     String? outcomes,
+    String? logo,
   }) {
     return Department(
       name: name ?? this.name,
       vision: vision ?? this.vision,
       mission: mission ?? this.mission,
       outcomes: outcomes ?? this.outcomes,
+      logo: logo ?? this.logo,
     );
   }
 
@@ -33,6 +43,7 @@ class Department {
       'vision': vision,
       'mission': mission,
       'outcomes': outcomes,
+      'logo': logo,
     };
   }
 
@@ -42,6 +53,7 @@ class Department {
       vision: map['vision'] ?? '',
       mission: map['mission'] ?? '',
       outcomes: map['outcomes'] ?? '',
+      logo: map['logo'] ?? '',
     );
   }
 
@@ -52,7 +64,7 @@ class Department {
 
   @override
   String toString() {
-    return 'Department(name: $name, vision: $vision, mission: $mission, outcomes: $outcomes)';
+    return 'Department(name: $name, vision: $vision, mission: $mission, outcomes: $outcomes, logo: $logo)';
   }
 
   @override
@@ -63,7 +75,8 @@ class Department {
         other.name == name &&
         other.vision == vision &&
         other.mission == mission &&
-        other.outcomes == outcomes;
+        other.outcomes == outcomes &&
+        other.logo == logo;
   }
 
   @override
@@ -71,6 +84,7 @@ class Department {
     return name.hashCode ^
         vision.hashCode ^
         mission.hashCode ^
-        outcomes.hashCode;
+        outcomes.hashCode ^
+        logo.hashCode;
   }
 }
