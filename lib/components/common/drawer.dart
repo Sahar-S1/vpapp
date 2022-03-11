@@ -11,8 +11,9 @@ import 'package:vpapp/pages/info_list.dart';
 class Link {
   final String name;
   final String link;
+  final IconData icon;
 
-  const Link({required this.name, required this.link});
+  const Link({required this.name, required this.link, required this.icon});
 }
 
 class AppDrawer extends StatelessWidget {
@@ -20,22 +21,27 @@ class AppDrawer extends StatelessWidget {
     Link(
       name: 'Home',
       link: HomePage.routeName,
-    ),
-    Link(
-      name: 'Announcments',
-      link: AnnouncementsPage.routeName,
+      icon: Icons.home,
     ),
     Link(
       name: 'Clubs',
       link: ClubsPage.routeName,
+      icon: Icons.group,
     ),
     Link(
       name: 'Blogs',
       link: BlogsPage.routeName,
+      icon: Icons.library_books,
     ),
     Link(
-      name: 'Info',
+      name: 'Announcements',
+      link: AnnouncementsPage.routeName,
+      icon: Icons.campaign,
+    ),
+    Link(
+      name: 'About College',
       link: InfoListPage.routeName,
+      icon: Icons.info,
     ),
   ];
 
@@ -74,10 +80,11 @@ class AppDrawer extends StatelessWidget {
           ),
           for (var link in _links)
             ListTile(
+              leading: Icon(link.icon),
               title: Text(
                 link.name,
                 style: theme.textTheme.titleLarge,
-                textAlign: TextAlign.center,
+                textAlign: TextAlign.left,
               ),
               onTap: () => context.goNamed(link.link),
             ),
