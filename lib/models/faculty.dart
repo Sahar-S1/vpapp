@@ -58,7 +58,7 @@ class Role {
 class Faculty {
   final String name;
   final Role role;
-  final String experience;
+  final int experience;
   final String photo;
   final int departmentId;
 
@@ -77,7 +77,7 @@ class Faculty {
   Faculty copyWith({
     String? name,
     Role? role,
-    String? experience,
+    int? experience,
     String? photo,
     int? departmentId,
   }) {
@@ -104,9 +104,9 @@ class Faculty {
     return Faculty(
       name: map['name'] ?? '',
       role: Role.fromMap(map['role']),
-      experience: map['experience'] ?? '',
+      experience: map['experience']?.toInt() ?? 0,
       photo: map['photo'] ?? '',
-      departmentId: map['departmentId']?.toInt() ?? 0,
+      departmentId: map['department']?.toInt() ?? 0,
     );
   }
 

@@ -160,12 +160,12 @@ class Course {
 
   factory Course.fromMap(Map<String, dynamic> map) {
     return Course(
-      name: map['name'] ?? '',
-      code: map['code'] ?? '',
-      abbrivation: map['abbrivation'] ?? '',
-      syllabus: map['syllabus'] ?? '',
-      semester: Semester.fromMap(map['semester']),
-      departmentId: map['departmentId']?.toInt() ?? 0,
+      name: map['course_id']['name'] ?? '',
+      code: map['course_id']['code'] ?? '',
+      abbrivation: map['course_id']['abbrivation'] ?? '',
+      syllabus: map['course_id']['syllabus'] ?? '',
+      semester: Semester.fromMap(map['semester_id']),
+      departmentId: map['department_id']['id']?.toInt() ?? 0,
     );
   }
 

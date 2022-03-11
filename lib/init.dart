@@ -4,7 +4,10 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:vpapp/services/announcement.dart';
 import 'package:vpapp/services/blog.dart';
 import 'package:vpapp/services/club.dart';
+import 'package:vpapp/services/course.dart';
+import 'package:vpapp/services/department.dart';
 import 'package:vpapp/services/directus.dart';
+import 'package:vpapp/services/faculty.dart';
 import 'package:vpapp/services/info.dart';
 
 Future<void> init() async {
@@ -38,6 +41,18 @@ Future<void> _initServices() async {
   );
   getIt.registerSingletonWithDependencies<InfoService>(
     () => InfoService(directus: getIt.get<DirectusService>()),
+    dependsOn: [DirectusService],
+  );
+  getIt.registerSingletonWithDependencies<DepartmentService>(
+    () => DepartmentService(directus: getIt.get<DirectusService>()),
+    dependsOn: [DirectusService],
+  );
+  getIt.registerSingletonWithDependencies<FacultyService>(
+    () => FacultyService(directus: getIt.get<DirectusService>()),
+    dependsOn: [DirectusService],
+  );
+  getIt.registerSingletonWithDependencies<CourseService>(
+    () => CourseService(directus: getIt.get<DirectusService>()),
     dependsOn: [DirectusService],
   );
 
