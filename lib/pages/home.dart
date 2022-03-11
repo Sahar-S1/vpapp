@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it_mixin/get_it_mixin.dart';
 import 'package:go_router/go_router.dart';
@@ -8,6 +7,7 @@ import 'package:vpapp/components/common/page_template.dart';
 import 'package:vpapp/components/common/text_icon_card.dart';
 import 'package:vpapp/config.dart';
 import 'package:vpapp/models/department.dart';
+import 'package:vpapp/pages/department.dart';
 import 'package:vpapp/pages/info_list.dart';
 import 'package:vpapp/services/department.dart';
 
@@ -47,49 +47,29 @@ class _HomePageState extends State<HomePage> with GetItStateMixin {
         body: child,
       ),
       childBuilder: (sc) => SingleChildScrollView(
+        controller: sc,
         child: Column(
           children: [
             InkWell(
               onTap: () => context.goNamed(InfoListPage.routeName),
-              child: TextIconCard(
+              child: const TextIconCard(
                 text: 'About College',
-                icon: CachedNetworkImage(
-                  imageUrl:
-                      '${AppConfig.directusAssetsEndpoint}/e22f1a67-acca-4c06-9872-b409440a1440.png',
-                  progressIndicatorBuilder: (context, url, downloadProgress) {
-                    return Center(
-                      child: CircularProgressIndicator(
-                        value: downloadProgress.progress,
-                      ),
-                    );
-                  },
-                  errorWidget: (context, url, error) {
-                    return const Center(
-                      child: Icon(Icons.error),
-                    );
-                  },
-                ),
+                iconUrl:
+                    '${AppConfig.directusAssetsEndpoint}/e22f1a67-acca-4c06-9872-b409440a1440.png',
               ),
             ),
             ...departments
                 .map(
-                  (department) => TextIconCard(
-                    text: department.name,
-                    icon: CachedNetworkImage(
-                      imageUrl: department.iconUrl,
-                      progressIndicatorBuilder:
-                          (context, url, downloadProgress) {
-                        return Center(
-                          child: CircularProgressIndicator(
-                            value: downloadProgress.progress,
-                          ),
-                        );
+                  (department) => InkWell(
+                    onTap: () => context.goNamed(
+                      DepartmentPage.routeName,
+                      params: {
+                        'id': department.id.toString(),
                       },
-                      errorWidget: (context, url, error) {
-                        return const Center(
-                          child: Icon(Icons.error),
-                        );
-                      },
+                    ),
+                    child: TextIconCard(
+                      text: department.name,
+                      iconUrl: department.iconUrl,
                     ),
                   ),
                 )

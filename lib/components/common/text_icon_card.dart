@@ -1,10 +1,11 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class TextIconCard extends StatelessWidget {
   final String text;
-  final Widget? icon;
+  final String? iconUrl;
 
-  const TextIconCard({Key? key, required this.text, this.icon})
+  const TextIconCard({Key? key, required this.text, this.iconUrl})
       : super(key: key);
 
   @override
@@ -38,10 +39,24 @@ class TextIconCard extends StatelessWidget {
                   ),
                 ),
               ),
-              if (icon != null)
+              if (iconUrl != null)
                 Expanded(
                   flex: 2,
-                  child: icon!,
+                  child: CachedNetworkImage(
+                    imageUrl: iconUrl!,
+                    progressIndicatorBuilder: (context, url, downloadProgress) {
+                      return Center(
+                        child: CircularProgressIndicator(
+                          value: downloadProgress.progress,
+                        ),
+                      );
+                    },
+                    errorWidget: (context, url, error) {
+                      return const Center(
+                        child: Icon(Icons.error),
+                      );
+                    },
+                  ),
                 ),
             ],
           ),

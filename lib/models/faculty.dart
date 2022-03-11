@@ -3,19 +3,23 @@ import 'dart:convert';
 import 'package:vpapp/config.dart';
 
 class Role {
+  final int id;
   final String name;
   final String abbrivation;
 
   Role({
+    required this.id,
     required this.name,
     required this.abbrivation,
   });
 
   Role copyWith({
+    int? id,
     String? name,
     String? abbrivation,
   }) {
     return Role(
+      id: id ?? this.id,
       name: name ?? this.name,
       abbrivation: abbrivation ?? this.abbrivation,
     );
@@ -23,6 +27,7 @@ class Role {
 
   Map<String, dynamic> toMap() {
     return {
+      'id': id,
       'name': name,
       'abbrivation': abbrivation,
     };
@@ -30,6 +35,7 @@ class Role {
 
   factory Role.fromMap(Map<String, dynamic> map) {
     return Role(
+      id: map['id']?.toInt() ?? 0,
       name: map['name'] ?? '',
       abbrivation: map['abbrivation'] ?? '',
     );
@@ -40,22 +46,24 @@ class Role {
   factory Role.fromJson(String source) => Role.fromMap(json.decode(source));
 
   @override
-  String toString() => 'Role(name: $name, abbrivation: $abbrivation)';
+  String toString() => 'Role(id: $id, name: $name, abbrivation: $abbrivation)';
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
     return other is Role &&
+        other.id == id &&
         other.name == name &&
         other.abbrivation == abbrivation;
   }
 
   @override
-  int get hashCode => name.hashCode ^ abbrivation.hashCode;
+  int get hashCode => id.hashCode ^ name.hashCode ^ abbrivation.hashCode;
 }
 
 class Faculty {
+  final int id;
   final String name;
   final Role role;
   final int experience;
@@ -67,6 +75,7 @@ class Faculty {
   }
 
   Faculty({
+    required this.id,
     required this.name,
     required this.role,
     required this.experience,
@@ -75,6 +84,7 @@ class Faculty {
   });
 
   Faculty copyWith({
+    int? id,
     String? name,
     Role? role,
     int? experience,
@@ -82,6 +92,7 @@ class Faculty {
     int? departmentId,
   }) {
     return Faculty(
+      id: id ?? this.id,
       name: name ?? this.name,
       role: role ?? this.role,
       experience: experience ?? this.experience,
@@ -92,6 +103,7 @@ class Faculty {
 
   Map<String, dynamic> toMap() {
     return {
+      'id': id,
       'name': name,
       'role': role.toMap(),
       'experience': experience,
@@ -102,6 +114,7 @@ class Faculty {
 
   factory Faculty.fromMap(Map<String, dynamic> map) {
     return Faculty(
+      id: map['id']?.toInt() ?? 0,
       name: map['name'] ?? '',
       role: Role.fromMap(map['role']),
       experience: map['experience']?.toInt() ?? 0,
@@ -117,7 +130,7 @@ class Faculty {
 
   @override
   String toString() {
-    return 'Faculty(name: $name, role: $role, experience: $experience, photo: $photo, departmentId: $departmentId)';
+    return 'Faculty(id: $id, name: $name, role: $role, experience: $experience, photo: $photo, departmentId: $departmentId)';
   }
 
   @override
@@ -125,6 +138,7 @@ class Faculty {
     if (identical(this, other)) return true;
 
     return other is Faculty &&
+        other.id == id &&
         other.name == name &&
         other.role == role &&
         other.experience == experience &&
@@ -134,7 +148,8 @@ class Faculty {
 
   @override
   int get hashCode {
-    return name.hashCode ^
+    return id.hashCode ^
+        name.hashCode ^
         role.hashCode ^
         experience.hashCode ^
         photo.hashCode ^

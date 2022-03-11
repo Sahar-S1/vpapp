@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:vpapp/config.dart';
 
 class Department {
+  final int id;
   final String name;
   final String abbr;
   final String vision;
@@ -15,6 +16,7 @@ class Department {
   }
 
   Department({
+    required this.id,
     required this.name,
     required this.abbr,
     required this.vision,
@@ -24,6 +26,7 @@ class Department {
   });
 
   Department copyWith({
+    int? id,
     String? name,
     String? abbr,
     String? vision,
@@ -32,6 +35,7 @@ class Department {
     String? icon,
   }) {
     return Department(
+      id: id ?? this.id,
       name: name ?? this.name,
       abbr: abbr ?? this.abbr,
       vision: vision ?? this.vision,
@@ -43,6 +47,7 @@ class Department {
 
   Map<String, dynamic> toMap() {
     return {
+      'id': id,
       'name': name,
       'abbr': abbr,
       'vision': vision,
@@ -54,6 +59,7 @@ class Department {
 
   factory Department.fromMap(Map<String, dynamic> map) {
     return Department(
+      id: map['id']?.toInt() ?? 0,
       name: map['name'] ?? '',
       abbr: map['abbr'] ?? '',
       vision: map['vision'] ?? '',
@@ -70,7 +76,7 @@ class Department {
 
   @override
   String toString() {
-    return 'Department(name: $name, abbr: $abbr, vision: $vision, mission: $mission, outcomes: $outcomes, icon: $icon)';
+    return 'Department(id: $id, name: $name, abbr: $abbr, vision: $vision, mission: $mission, outcomes: $outcomes, icon: $icon)';
   }
 
   @override
@@ -78,6 +84,7 @@ class Department {
     if (identical(this, other)) return true;
 
     return other is Department &&
+        other.id == id &&
         other.name == name &&
         other.abbr == abbr &&
         other.vision == vision &&
@@ -88,7 +95,8 @@ class Department {
 
   @override
   int get hashCode {
-    return name.hashCode ^
+    return id.hashCode ^
+        name.hashCode ^
         abbr.hashCode ^
         vision.hashCode ^
         mission.hashCode ^

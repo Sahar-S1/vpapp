@@ -1,19 +1,23 @@
 import 'dart:convert';
 
 class Year {
+  final int id;
   final String title;
   final int number;
 
   Year({
+    required this.id,
     required this.title,
     required this.number,
   });
 
   Year copyWith({
+    int? id,
     String? title,
     int? number,
   }) {
     return Year(
+      id: id ?? this.id,
       title: title ?? this.title,
       number: number ?? this.number,
     );
@@ -21,6 +25,7 @@ class Year {
 
   Map<String, dynamic> toMap() {
     return {
+      'id': id,
       'title': title,
       'number': number,
     };
@@ -28,6 +33,7 @@ class Year {
 
   factory Year.fromMap(Map<String, dynamic> map) {
     return Year(
+      id: map['id']?.toInt() ?? 0,
       title: map['title'] ?? '',
       number: map['number']?.toInt() ?? 0,
     );
@@ -38,36 +44,43 @@ class Year {
   factory Year.fromJson(String source) => Year.fromMap(json.decode(source));
 
   @override
-  String toString() => 'Year(title: $title, number: $number)';
+  String toString() => 'Year(id: $id, title: $title, number: $number)';
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is Year && other.title == title && other.number == number;
+    return other is Year &&
+        other.id == id &&
+        other.title == title &&
+        other.number == number;
   }
 
   @override
-  int get hashCode => title.hashCode ^ number.hashCode;
+  int get hashCode => id.hashCode ^ title.hashCode ^ number.hashCode;
 }
 
 class Semester {
+  final int id;
   final String title;
   final int number;
   final Year year;
 
   Semester({
+    required this.id,
     required this.title,
     required this.number,
     required this.year,
   });
 
   Semester copyWith({
+    int? id,
     String? title,
     int? number,
     Year? year,
   }) {
     return Semester(
+      id: id ?? this.id,
       title: title ?? this.title,
       number: number ?? this.number,
       year: year ?? this.year,
@@ -76,6 +89,7 @@ class Semester {
 
   Map<String, dynamic> toMap() {
     return {
+      'id': id,
       'title': title,
       'number': number,
       'year': year.toMap(),
@@ -84,6 +98,7 @@ class Semester {
 
   factory Semester.fromMap(Map<String, dynamic> map) {
     return Semester(
+      id: map['id']?.toInt() ?? 0,
       title: map['title'] ?? '',
       number: map['number']?.toInt() ?? 0,
       year: Year.fromMap(map['year']),
@@ -96,23 +111,29 @@ class Semester {
       Semester.fromMap(json.decode(source));
 
   @override
-  String toString() => 'Semester(title: $title, number: $number, year: $year)';
+  String toString() {
+    return 'Semester(id: $id, title: $title, number: $number, year: $year)';
+  }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
     return other is Semester &&
+        other.id == id &&
         other.title == title &&
         other.number == number &&
         other.year == year;
   }
 
   @override
-  int get hashCode => title.hashCode ^ number.hashCode ^ year.hashCode;
+  int get hashCode {
+    return id.hashCode ^ title.hashCode ^ number.hashCode ^ year.hashCode;
+  }
 }
 
 class Course {
+  final int id;
   final String name;
   final String code;
   final String abbrivation;
@@ -121,6 +142,7 @@ class Course {
   final int departmentId;
 
   Course({
+    required this.id,
     required this.name,
     required this.code,
     required this.abbrivation,
@@ -130,6 +152,7 @@ class Course {
   });
 
   Course copyWith({
+    int? id,
     String? name,
     String? code,
     String? abbrivation,
@@ -138,6 +161,7 @@ class Course {
     int? departmentId,
   }) {
     return Course(
+      id: id ?? this.id,
       name: name ?? this.name,
       code: code ?? this.code,
       abbrivation: abbrivation ?? this.abbrivation,
@@ -149,6 +173,7 @@ class Course {
 
   Map<String, dynamic> toMap() {
     return {
+      'id': id,
       'name': name,
       'code': code,
       'abbrivation': abbrivation,
@@ -160,6 +185,7 @@ class Course {
 
   factory Course.fromMap(Map<String, dynamic> map) {
     return Course(
+      id: map['course_id']['id']?.toInt() ?? 0,
       name: map['course_id']['name'] ?? '',
       code: map['course_id']['code'] ?? '',
       abbrivation: map['course_id']['abbrivation'] ?? '',
@@ -175,7 +201,7 @@ class Course {
 
   @override
   String toString() {
-    return 'Course(name: $name, code: $code, abbrivation: $abbrivation, syllabus: $syllabus, semester: $semester, departmentId: $departmentId)';
+    return 'Course(id: $id, name: $name, code: $code, abbrivation: $abbrivation, syllabus: $syllabus, semester: $semester, departmentId: $departmentId)';
   }
 
   @override
@@ -183,6 +209,7 @@ class Course {
     if (identical(this, other)) return true;
 
     return other is Course &&
+        other.id == id &&
         other.name == name &&
         other.code == code &&
         other.abbrivation == abbrivation &&
@@ -193,7 +220,8 @@ class Course {
 
   @override
   int get hashCode {
-    return name.hashCode ^
+    return id.hashCode ^
+        name.hashCode ^
         code.hashCode ^
         abbrivation.hashCode ^
         syllabus.hashCode ^
