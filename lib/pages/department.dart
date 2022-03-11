@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:get_it_mixin/get_it_mixin.dart';
-import 'package:vpapp/components/announcements/announcment_card_content.dart';
-import 'package:vpapp/components/common/html.dart';
 import 'package:vpapp/components/common/page_template.dart';
 import 'package:vpapp/components/common/text_icon_card.dart';
 import 'package:vpapp/config.dart';
 import 'package:vpapp/models/department.dart';
+import 'package:vpapp/pages/department_faculty.dart';
 import 'package:vpapp/pages/home.dart';
 import 'package:vpapp/services/department.dart';
 
 class DepartmentPage extends StatelessWidget with GetItMixin {
-  static const routeName = 'department-info';
+  static const routeName = 'department';
 
   final int id;
 
@@ -69,18 +68,26 @@ class DepartmentPage extends StatelessWidget with GetItMixin {
           childBuilder: (sc) => SingleChildScrollView(
             controller: sc,
             child: Column(
-              children: const [
-                TextIconCard(
+              children: [
+                const TextIconCard(
                   text: 'Information',
                   iconUrl:
                       '${AppConfig.directusAssetsEndpoint}/bf3f1535-1d2d-4a4d-851a-949e913df76a',
                 ),
-                TextIconCard(
-                  text: 'Faculty',
-                  iconUrl:
-                      '${AppConfig.directusAssetsEndpoint}/bf3f1535-1d2d-4a4d-851a-949e913df76a',
+                InkWell(
+                  onTap: () => context.goNamed(
+                    DepartmentFacultyPage.routeName,
+                    params: {
+                      'id': department.id.toString(),
+                    },
+                  ),
+                  child: const TextIconCard(
+                    text: 'Faculty',
+                    iconUrl:
+                        '${AppConfig.directusAssetsEndpoint}/bf3f1535-1d2d-4a4d-851a-949e913df76a',
+                  ),
                 ),
-                TextIconCard(
+                const TextIconCard(
                   text: 'Courses',
                   iconUrl:
                       '${AppConfig.directusAssetsEndpoint}/bf3f1535-1d2d-4a4d-851a-949e913df76a',

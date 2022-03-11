@@ -5,6 +5,7 @@ import 'package:vpapp/pages/blog.dart';
 import 'package:vpapp/pages/blogs.dart';
 import 'package:vpapp/pages/clubs.dart';
 import 'package:vpapp/pages/department.dart';
+import 'package:vpapp/pages/department_faculty.dart';
 import 'package:vpapp/pages/home.dart';
 import 'package:vpapp/pages/info.dart';
 import 'package:vpapp/pages/info_list.dart';
@@ -100,6 +101,16 @@ final router = GoRouter(
             ),
             GoRoute(
               path: 'faculty',
+              name: DepartmentFacultyPage.routeName,
+              builder: (context, state) {
+                String? id = state.params['id'];
+
+                if (id == null || int.tryParse(id) == null) {
+                  return HomePage();
+                }
+
+                return DepartmentFacultyPage(id: int.parse(id));
+              },
             ),
             GoRoute(
               path: 'courses',
