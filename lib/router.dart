@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:vpapp/pages/announcement.dart';
 import 'package:vpapp/pages/announcements.dart';
+import 'package:vpapp/pages/blog.dart';
 import 'package:vpapp/pages/blogs.dart';
 import 'package:vpapp/pages/clubs.dart';
 import 'package:vpapp/pages/home.dart';
@@ -41,10 +42,24 @@ final router = GoRouter(
           builder: (context, state) => const ClubsPage(),
         ),
         GoRoute(
-          path: 'blogs',
-          name: BlogsPage.routeName,
-          builder: (context, state) => const BlogsPage(),
-        ),
+            path: 'blogs',
+            name: BlogsPage.routeName,
+            builder: (context, state) => const BlogsPage(),
+            routes: [
+              GoRoute(
+                path: ':id',
+                name: BlogPage.routeName,
+                builder: (context, state) {
+                  String? id = state.params['id'];
+
+                  if (id == null || int.tryParse(id) == null) {
+                    return const BlogsPage();
+                  }
+
+                  return BlogPage(id: int.parse(id));
+                },
+              ),
+            ]),
         GoRoute(
           path: 'info',
           name: InfoListPage.routeName,

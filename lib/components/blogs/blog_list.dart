@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get_it_mixin/get_it_mixin.dart';
+import 'package:go_router/go_router.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:vpapp/components/blogs/blog_card.dart';
 import 'package:vpapp/models/blog.dart';
+import 'package:vpapp/pages/blog.dart';
 import 'package:vpapp/services/blog.dart';
 
 class BlogsList extends StatefulWidget with GetItStatefulWidgetMixin {
@@ -54,7 +56,10 @@ class _BlogsListState extends State<BlogsList> with GetItStateMixin {
         pagingController: _pagingController,
         builderDelegate: PagedChildBuilderDelegate<Blog>(
           itemBuilder: (context, blog, index) => InkWell(
-            onTap: () => {}, // TODO
+            onTap: () => context.goNamed(
+              BlogPage.routeName,
+              params: {'id': blog.id.toString()},
+            ),
             child: BlogCard(blog: blog),
           ),
         ),
