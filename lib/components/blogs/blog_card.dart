@@ -21,14 +21,14 @@ class BlogCard extends StatelessWidget {
           style: BorderStyle.solid,
         ),
       ),
-      margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
+      margin: const EdgeInsets.symmetric(vertical: 8.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           CachedNetworkImage(
             imageUrl: blog.imageUrl,
             imageBuilder: (context, imageProvider) => Container(
-              height: 120,
+              height: 160,
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.vertical(
                   top: Radius.circular(8.0),
