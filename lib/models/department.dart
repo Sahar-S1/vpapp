@@ -7,10 +7,10 @@ class Department {
   final String vision;
   final String mission;
   final String outcomes;
-  final String logo;
+  final String icon;
 
-  String get logoUrl {
-    return '${AppConfig.directusAssetsEndpoint}/$logo';
+  String get iconUrl {
+    return '${AppConfig.directusAssetsEndpoint}/$icon';
   }
 
   Department({
@@ -18,7 +18,7 @@ class Department {
     required this.vision,
     required this.mission,
     required this.outcomes,
-    required this.logo,
+    required this.icon,
   });
 
   Department copyWith({
@@ -26,14 +26,14 @@ class Department {
     String? vision,
     String? mission,
     String? outcomes,
-    String? logo,
+    String? icon,
   }) {
     return Department(
       name: name ?? this.name,
       vision: vision ?? this.vision,
       mission: mission ?? this.mission,
       outcomes: outcomes ?? this.outcomes,
-      logo: logo ?? this.logo,
+      icon: icon ?? this.icon,
     );
   }
 
@@ -43,7 +43,7 @@ class Department {
       'vision': vision,
       'mission': mission,
       'outcomes': outcomes,
-      'logo': logo,
+      'icon': icon,
     };
   }
 
@@ -53,7 +53,7 @@ class Department {
       vision: map['vision'] ?? '',
       mission: map['mission'] ?? '',
       outcomes: map['outcomes'] ?? '',
-      logo: map['logo'] ?? '',
+      icon: map['icon'] ?? '',
     );
   }
 
@@ -64,7 +64,7 @@ class Department {
 
   @override
   String toString() {
-    return 'Department(name: $name, vision: $vision, mission: $mission, outcomes: $outcomes, logo: $logo)';
+    return 'Department(name: $name, vision: $vision, mission: $mission, outcomes: $outcomes, icon: $icon)';
   }
 
   @override
@@ -76,7 +76,7 @@ class Department {
         other.vision == vision &&
         other.mission == mission &&
         other.outcomes == outcomes &&
-        other.logo == logo;
+        other.icon == icon;
   }
 
   @override
@@ -85,6 +85,6 @@ class Department {
         vision.hashCode ^
         mission.hashCode ^
         outcomes.hashCode ^
-        logo.hashCode;
+        icon.hashCode;
   }
 }
