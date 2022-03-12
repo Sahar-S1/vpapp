@@ -44,6 +44,7 @@ class TextIconCard extends StatelessWidget {
                   flex: 2,
                   child: CachedNetworkImage(
                     imageUrl: iconUrl!,
+                    color: theme.colorScheme.onSurface,
                     progressIndicatorBuilder: (context, url, downloadProgress) {
                       return Center(
                         child: CircularProgressIndicator(

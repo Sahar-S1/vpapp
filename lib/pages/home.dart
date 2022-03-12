@@ -35,8 +35,6 @@ class _HomePageState extends State<HomePage> with GetItStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    var theme = Theme.of(context);
-
     return PageTemplate(
       header: AppConfig.title,
       parentBuilder: ({required child, required title}) => Scaffold(
