@@ -72,7 +72,7 @@ class DepartmentPage extends StatelessWidget with GetItMixin {
                 const TextIconCard(
                   text: 'Information',
                   iconUrl:
-                      '${AppConfig.directusAssetsEndpoint}/bf3f1535-1d2d-4a4d-851a-949e913df76a',
+                      '${AppConfig.directusAssetsEndpoint}/6f0a54bc-f17b-4e08-a494-f0dd46ba08ca',
                 ),
                 InkWell(
                   onTap: () => context.goNamed(
@@ -84,13 +84,13 @@ class DepartmentPage extends StatelessWidget with GetItMixin {
                   child: const TextIconCard(
                     text: 'Faculty',
                     iconUrl:
-                        '${AppConfig.directusAssetsEndpoint}/bf3f1535-1d2d-4a4d-851a-949e913df76a',
+                        '${AppConfig.directusAssetsEndpoint}/769746a4-824c-49a0-a1e9-4a8edf0feed4',
                   ),
                 ),
                 const TextIconCard(
                   text: 'Courses',
                   iconUrl:
-                      '${AppConfig.directusAssetsEndpoint}/bf3f1535-1d2d-4a4d-851a-949e913df76a',
+                      '${AppConfig.directusAssetsEndpoint}/a7dec110-c387-4733-8185-041c807f9bdb',
                 ),
               ],
             ),
