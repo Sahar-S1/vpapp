@@ -9,6 +9,7 @@ import 'package:vpapp/services/department.dart';
 import 'package:vpapp/services/directus.dart';
 import 'package:vpapp/services/faculty.dart';
 import 'package:vpapp/services/info.dart';
+import 'package:vpapp/theme.dart';
 
 Future<void> init() async {
   // Flutter Initializations
@@ -18,7 +19,13 @@ Future<void> init() async {
   await Hive.initFlutter();
 
   // Custom Initializations
+  await _initHive();
   await _initServices();
+}
+
+Future<void> _initHive() async {
+  Hive.registerAdapter(ThemeModeAdapter());
+  await Hive.openBox(AppTheme.box);
 }
 
 Future<void> _initServices() async {

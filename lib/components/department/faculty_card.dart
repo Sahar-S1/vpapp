@@ -43,7 +43,7 @@ class FacultyCard extends StatelessWidget {
                       faculty.role.name,
                       style: theme.textTheme.titleSmall,
                     ),
-                    Expanded(child: Container()),
+                    const Spacer(),
                     Text(
                       'Teaching: ${faculty.experience} Yrs',
                       style: theme.textTheme.caption,

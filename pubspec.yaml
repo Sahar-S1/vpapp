@@ -30,6 +30,7 @@ dependencies:
   cached_network_image: ^3.2.0 # Caches Network Images
   easy_image_viewer: ^1.0.3 # Image Viewer
   sliding_up_panel: ^2.0.0+1 # Bottom sliding panel
+  shared_preferences: ^2.0.13 # Key-Value Pairs Store
 
 dev_dependencies:
   flutter_test:

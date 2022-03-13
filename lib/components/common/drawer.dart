@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:vpapp/components/common/theme_change_btn.dart';
 import 'package:vpapp/config.dart';
 import 'package:vpapp/pages/announcements.dart';
 import 'package:vpapp/pages/blogs.dart';
@@ -51,32 +52,41 @@ class AppDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     return Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,
+      child: Column(
         children: [
-          DrawerHeader(
-            decoration: BoxDecoration(
-              color: theme.primaryColor,
-            ),
-            child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 20),
-              alignment: Alignment.center,
-              child: CachedNetworkImage(
-                imageUrl: AppConfig.logoUrl,
-                progressIndicatorBuilder: (context, url, downloadProgress) {
-                  return Center(
-                    child: CircularProgressIndicator(
-                      value: downloadProgress.progress,
-                    ),
-                  );
-                },
-                errorWidget: (context, url, error) {
-                  return const Center(
-                    child: Icon(Icons.error),
-                  );
-                },
+          Stack(
+            children: [
+              DrawerHeader(
+                decoration: BoxDecoration(
+                  color: theme.primaryColor,
+                ),
+                child: Container(
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 0, vertical: 20),
+                  alignment: Alignment.center,
+                  child: CachedNetworkImage(
+                    imageUrl: AppConfig.logoUrl,
+                    progressIndicatorBuilder: (context, url, downloadProgress) {
+                      return Center(
+                        child: CircularProgressIndicator(
+                          value: downloadProgress.progress,
+                        ),
+                      );
+                    },
+                    errorWidget: (context, url, error) {
+                      return const Center(
+                        child: Icon(Icons.error),
+                      );
+                    },
+                  ),
+                ),
               ),
-            ),
+              const Positioned(
+                top: 12,
+                right: -12,
+                child: ThemeChangeBtn(),
+              ),
+            ],
           ),
           for (var link in _links)
             ListTile(
@@ -101,6 +111,21 @@ class AppDrawer extends StatelessWidget {
               },
             ),
           ),
+          // const Spacer(),
+          // const Divider(),
+          // Row(
+          //   children: [
+          //     RawMaterialButton(
+          //       child: Icon(
+          //         Icons.arrow_back,
+          //         color: Theme.of(context).primaryTextTheme.button?.color,
+          //       ),
+          //       onPressed: () => Navigator.of(context).pop(),
+          //     ),
+          //     const Spacer(),
+          //     const ThemeChangeBtn(),
+          //   ],
+          // ),
         ],
       ),
     );
