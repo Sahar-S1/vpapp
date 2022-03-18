@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:vpapp/config.dart';
@@ -27,6 +28,8 @@ class App extends StatelessWidget {
           Locale('en'),
         ],
         localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
           FormBuilderLocalizations.delegate,
         ],
       ),
