@@ -8,6 +8,7 @@ import 'package:vpapp/pages/blogs.dart';
 import 'package:vpapp/pages/clubs.dart';
 import 'package:vpapp/pages/home.dart';
 import 'package:vpapp/pages/info_list.dart';
+import 'package:vpapp/pages/login.dart';
 
 class Link {
   final String name;
@@ -43,6 +44,11 @@ class AppDrawer extends StatelessWidget {
       name: 'About College',
       link: InfoListPage.routeName,
       icon: Icons.info,
+    ),
+    Link(
+      name: 'Login',
+      link: LoginPage.routeName,
+      icon: Icons.login,
     ),
   ];
 

@@ -1,7 +1,7 @@
 name: vpapp
 description: A new Flutter project.
 
-publish_to: 'none'
+publish_to: "none"
 
 version: 1.0.0+1
 
@@ -31,6 +31,8 @@ dependencies:
   easy_image_viewer: ^1.0.3 # Image Viewer
   sliding_up_panel: ^2.0.0+1 # Bottom sliding panel
   shared_preferences: ^2.0.13 # Key-Value Pairs Store
+  flutter_form_builder: ^7.1.1 # Form Builder
+  form_builder_validators: ^7.7.0 # Form Builder validator
 
 dev_dependencies:
   flutter_test:

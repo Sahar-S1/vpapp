@@ -9,6 +9,7 @@ import 'package:vpapp/pages/department_faculty.dart';
 import 'package:vpapp/pages/home.dart';
 import 'package:vpapp/pages/info.dart';
 import 'package:vpapp/pages/info_list.dart';
+import 'package:vpapp/pages/login.dart';
 
 final router = GoRouter(
   initialLocation: '/',
@@ -18,6 +19,11 @@ final router = GoRouter(
       name: HomePage.routeName,
       builder: (context, state) => HomePage(),
       routes: [
+        GoRoute(
+          path: 'login',
+          name: LoginPage.routeName,
+          builder: (context, state) => const LoginPage(),
+        ),
         GoRoute(
           path: 'announcements',
           name: AnnouncementsPage.routeName,
