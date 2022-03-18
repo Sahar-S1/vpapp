@@ -10,22 +10,17 @@ class UserAction extends StatelessWidget with GetItMixin {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<bool>(
-      valueListenable: get<AuthService>().isLoggedIn,
-      builder: (context, isLoggedIn, child) {
-        if (isLoggedIn) {
-          return ValueListenableBuilder<DirectusUser?>(
-            valueListenable: get<AuthService>().currentUser,
-            builder: (context, currentUser, child) {
-              return IconButton(
-                icon: CircleAvatar(
-                  backgroundImage:
-                      CachedNetworkImageProvider(currentUser!.avatarUrl),
-                ),
-                onPressed: () {
-                  get<AuthService>().logout();
-                },
-              );
+    return ValueListenableBuilder<DirectusUser?>(
+      valueListenable: get<AuthService>().currentUser,
+      builder: (context, currentUser, child) {
+        if (currentUser != null) {
+          return IconButton(
+            icon: CircleAvatar(
+              backgroundImage:
+                  CachedNetworkImageProvider(currentUser.avatarUrl),
+            ),
+            onPressed: () {
+              get<AuthService>().logout();
             },
           );
         } else {

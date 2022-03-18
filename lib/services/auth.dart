@@ -7,7 +7,6 @@ import 'package:fresh_dio/fresh_dio.dart';
 import 'package:vpapp/config.dart';
 
 import 'package:vpapp/services/directus.dart';
-import 'package:vpapp/utils/computed_value_notifier.dart';
 
 class AuthService with ChangeNotifier {
   static const String _loginEndpoint = '/auth/login';
@@ -18,9 +17,6 @@ class AuthService with ChangeNotifier {
   final DirectusService _directus;
   final Fresh<DirectusToken> fresh;
   ValueNotifier<DirectusUser?> currentUser = ValueNotifier(null);
-
-  ValueNotifier<bool> get isLoggedIn =>
-      ComputedValueNotifier<bool>(currentUser, () => currentUser.value != null);
 
   AuthService({required DirectusService directus})
       : _directus = directus,
