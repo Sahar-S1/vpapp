@@ -1,11 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it_mixin/get_it_mixin.dart';
-import 'package:go_router/go_router.dart';
 import 'package:vpapp/components/common/html.dart';
+import 'package:vpapp/components/common/page_error.dart';
+import 'package:vpapp/components/common/page_loading.dart';
 import 'package:vpapp/components/common/page_template.dart';
 import 'package:vpapp/models/blog.dart';
-import 'package:vpapp/pages/home.dart';
 import 'package:vpapp/services/blog.dart';
 
 class BlogPage extends StatelessWidget with GetItMixin {
@@ -23,39 +23,16 @@ class BlogPage extends StatelessWidget with GetItMixin {
       future: get<BlogService>().getOne(id),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Scaffold(
-            appBar: AppBar(title: const Text('Loading...')),
-            body: const Center(child: CircularProgressIndicator()),
-          );
+          return const PageLoading();
         }
 
         if (snapshot.hasError) {
-          return Scaffold(
-            appBar: AppBar(title: const Text('Error')),
-            body: SizedBox(
-              width: double.infinity,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  // SelectableText(snapshot.error.toString()),
-                  Text(
-                    'Some internall error !!',
-                    style: theme.textTheme.headlineMedium
-                        ?.apply(color: theme.errorColor),
-                  ),
-                  TextButton(
-                    onPressed: () => context.goNamed(HomePage.routeName),
-                    child: const Text('Home'),
-                  ),
-                ],
-              ),
-            ),
-          );
+          return const PageError();
         }
 
         assert(snapshot.hasData);
         final blog = snapshot.data!;
+
         return PageTemplate(
           parentBuilder: ({required child, required title}) => Scaffold(
             appBar: AppBar(

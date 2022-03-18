@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:get_it_mixin/get_it_mixin.dart';
+import 'package:vpapp/components/common/page_error.dart';
+import 'package:vpapp/components/common/page_loading.dart';
 import 'package:vpapp/components/common/page_template.dart';
 import 'package:vpapp/components/common/text_icon_card.dart';
 import 'package:vpapp/config.dart';
 import 'package:vpapp/models/department.dart';
 import 'package:vpapp/pages/department_faculty.dart';
-import 'package:vpapp/pages/home.dart';
+import 'package:vpapp/pages/department_info.dart';
 import 'package:vpapp/services/department.dart';
 
 class DepartmentPage extends StatelessWidget with GetItMixin {
@@ -18,45 +20,20 @@ class DepartmentPage extends StatelessWidget with GetItMixin {
 
   @override
   Widget build(BuildContext context) {
-    var theme = Theme.of(context);
-
     return FutureBuilder<Department>(
       future: get<DepartmentService>().getOne(id),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Scaffold(
-            appBar: AppBar(title: const Text('Loading...')),
-            body: const Center(child: CircularProgressIndicator()),
-          );
+          return const PageLoading();
         }
 
         if (snapshot.hasError) {
-          return Scaffold(
-            appBar: AppBar(title: const Text('Error')),
-            body: SizedBox(
-              width: double.infinity,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  // SelectableText(snapshot.error.toString()),
-                  Text(
-                    'Some internall error !!',
-                    style: theme.textTheme.headlineMedium
-                        ?.apply(color: theme.errorColor),
-                  ),
-                  TextButton(
-                    onPressed: () => context.goNamed(HomePage.routeName),
-                    child: const Text('Home'),
-                  ),
-                ],
-              ),
-            ),
-          );
+          return const PageError();
         }
 
         assert(snapshot.hasData);
         final department = snapshot.data!;
+
         return PageTemplate(
           header: department.name,
           parentBuilder: ({required child, required title}) => Scaffold(
@@ -69,10 +46,18 @@ class DepartmentPage extends StatelessWidget with GetItMixin {
             controller: sc,
             child: Column(
               children: [
-                const TextIconCard(
-                  text: 'Information',
-                  iconUrl:
-                      '${AppConfig.directusAssetsEndpoint}/6f0a54bc-f17b-4e08-a494-f0dd46ba08ca',
+                InkWell(
+                  onTap: () => context.goNamed(
+                    DepartmentInfoPage.routeName,
+                    params: {
+                      'id': department.id.toString(),
+                    },
+                  ),
+                  child: const TextIconCard(
+                    text: 'Information',
+                    iconUrl:
+                        '${AppConfig.directusAssetsEndpoint}/6f0a54bc-f17b-4e08-a494-f0dd46ba08ca',
+                  ),
                 ),
                 InkWell(
                   onTap: () => context.goNamed(
