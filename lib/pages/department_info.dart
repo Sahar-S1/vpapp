@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:get_it_mixin/get_it_mixin.dart';
+import 'package:go_router/go_router.dart';
 import 'package:vpapp/components/common/page_template.dart';
-import 'package:vpapp/components/common/text_icon_card.dart';
-import 'package:vpapp/config.dart';
+import 'package:vpapp/components/info/info_sections_column.dart';
 import 'package:vpapp/models/department.dart';
-import 'package:vpapp/pages/department_faculty.dart';
-import 'package:vpapp/pages/department_info.dart';
+import 'package:vpapp/models/info.dart';
 import 'package:vpapp/pages/home.dart';
 import 'package:vpapp/services/department.dart';
 
-class DepartmentPage extends StatelessWidget with GetItMixin {
-  static const routeName = 'department';
+class DepartmentInfoPage extends StatelessWidget with GetItMixin {
+  static const routeName = 'department-info';
 
   final int id;
 
-  DepartmentPage({Key? key, required this.id}) : super(key: key);
+  DepartmentInfoPage({Key? key, required this.id}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -68,40 +66,29 @@ class DepartmentPage extends StatelessWidget with GetItMixin {
           ),
           childBuilder: (sc) => SingleChildScrollView(
             controller: sc,
-            child: Column(
-              children: [
-                InkWell(
-                  onTap: () => context.goNamed(
-                    DepartmentInfoPage.routeName,
-                    params: {
-                      'id': department.id.toString(),
-                    },
+            child: InfoSectionsColumn(
+              info: Info(
+                id: department.id,
+                name: department.name,
+                icon: department.icon,
+                sections: [
+                  InfoSection(
+                    id: 1,
+                    title: 'Vision',
+                    description: department.vision,
                   ),
-                  child: const TextIconCard(
-                    text: 'Information',
-                    iconUrl:
-                        '${AppConfig.directusAssetsEndpoint}/6f0a54bc-f17b-4e08-a494-f0dd46ba08ca',
+                  InfoSection(
+                    id: 2,
+                    title: 'Mission',
+                    description: department.mission,
                   ),
-                ),
-                InkWell(
-                  onTap: () => context.goNamed(
-                    DepartmentFacultyPage.routeName,
-                    params: {
-                      'id': department.id.toString(),
-                    },
+                  InfoSection(
+                    id: 3,
+                    title: 'Outcomes',
+                    description: department.outcomes,
                   ),
-                  child: const TextIconCard(
-                    text: 'Faculty',
-                    iconUrl:
-                        '${AppConfig.directusAssetsEndpoint}/769746a4-824c-49a0-a1e9-4a8edf0feed4',
-                  ),
-                ),
-                const TextIconCard(
-                  text: 'Courses',
-                  iconUrl:
-                      '${AppConfig.directusAssetsEndpoint}/a7dec110-c387-4733-8185-041c807f9bdb',
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         );
