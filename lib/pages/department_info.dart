@@ -32,7 +32,7 @@ class DepartmentInfoPage extends StatelessWidget with GetItMixin {
         final department = snapshot.data!;
 
         return PageTemplate(
-          header: department.name,
+          header: 'Information',
           parentBuilder: ({required child, required title}) => Scaffold(
             appBar: AppBar(
               title: Text(title),
