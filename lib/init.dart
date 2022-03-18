@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:vpapp/services/announcement.dart';
+import 'package:vpapp/services/auth.dart';
 import 'package:vpapp/services/blog.dart';
 import 'package:vpapp/services/club.dart';
 import 'package:vpapp/services/course.dart';
@@ -31,36 +32,32 @@ Future<void> _initHive() async {
 Future<void> _initServices() async {
   var getIt = GetIt.instance;
 
-  getIt.registerSingletonAsync<DirectusService>(
-    () async => await DirectusService().init(),
+  getIt.registerSingleton<DirectusService>(
+    await DirectusService().init(),
   );
-  getIt.registerSingletonWithDependencies<AnnouncementService>(
-    () => AnnouncementService(directus: getIt.get<DirectusService>()),
-    dependsOn: [DirectusService],
+  getIt.registerSingleton<AuthService>(
+    AuthService(directus: getIt.get<DirectusService>()),
   );
-  getIt.registerSingletonWithDependencies<ClubService>(
-    () => ClubService(directus: getIt.get<DirectusService>()),
-    dependsOn: [DirectusService],
+  getIt.registerSingleton<AnnouncementService>(
+    AnnouncementService(directus: getIt.get<DirectusService>()),
   );
-  getIt.registerSingletonWithDependencies<BlogService>(
-    () => BlogService(directus: getIt.get<DirectusService>()),
-    dependsOn: [DirectusService],
+  getIt.registerSingleton<ClubService>(
+    ClubService(directus: getIt.get<DirectusService>()),
   );
-  getIt.registerSingletonWithDependencies<InfoService>(
-    () => InfoService(directus: getIt.get<DirectusService>()),
-    dependsOn: [DirectusService],
+  getIt.registerSingleton<BlogService>(
+    BlogService(directus: getIt.get<DirectusService>()),
   );
-  getIt.registerSingletonWithDependencies<DepartmentService>(
-    () => DepartmentService(directus: getIt.get<DirectusService>()),
-    dependsOn: [DirectusService],
+  getIt.registerSingleton<InfoService>(
+    InfoService(directus: getIt.get<DirectusService>()),
   );
-  getIt.registerSingletonWithDependencies<FacultyService>(
-    () => FacultyService(directus: getIt.get<DirectusService>()),
-    dependsOn: [DirectusService],
+  getIt.registerSingleton<DepartmentService>(
+    DepartmentService(directus: getIt.get<DirectusService>()),
   );
-  getIt.registerSingletonWithDependencies<CourseService>(
-    () => CourseService(directus: getIt.get<DirectusService>()),
-    dependsOn: [DirectusService],
+  getIt.registerSingleton<FacultyService>(
+    FacultyService(directus: getIt.get<DirectusService>()),
+  );
+  getIt.registerSingleton<CourseService>(
+    CourseService(directus: getIt.get<DirectusService>()),
   );
 
   await getIt.allReady();

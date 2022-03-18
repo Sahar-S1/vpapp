@@ -11,7 +11,7 @@ abstract class ItemService<I> {
 
   final DirectusService _directus;
 
-  const ItemService({required directus}) : _directus = directus;
+  const ItemService({required DirectusService directus}) : _directus = directus;
 
   Future<int> getCount({dynamic filterValue}) async {
     var res = await _directus.dio.get(

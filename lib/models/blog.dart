@@ -16,9 +16,7 @@ class Blog {
   final List<String> tags;
   final DateTime datePublished;
 
-  String get imageUrl {
-    return '${AppConfig.directusAssetsEndpoint}/$image';
-  }
+  String get imageUrl => '${AppConfig.directusAssetsEndpoint}/$image';
 
   Blog({
     required this.id,

@@ -71,9 +71,7 @@ class Info {
   final String icon;
   final List<InfoSection> sections;
 
-  String get iconUrl {
-    return '${AppConfig.directusAssetsEndpoint}/$icon';
-  }
+  String get iconUrl => '${AppConfig.directusAssetsEndpoint}/$icon';
 
   Info({
     required this.id,

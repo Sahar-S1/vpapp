@@ -12,9 +12,7 @@ class Club {
   final String description;
   final Color color;
 
-  String get logoUrl {
-    return '${AppConfig.directusAssetsEndpoint}/$logo';
-  }
+  String get logoUrl => '${AppConfig.directusAssetsEndpoint}/$logo';
 
   Club({
     required this.id,

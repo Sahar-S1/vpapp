@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-class AppTheme with ChangeNotifier {
+class AppTheme {
   static const String box = 'vp_apptheme';
   static const String key = 'vp_apptheme_thememode';
 

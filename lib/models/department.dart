@@ -11,9 +11,7 @@ class Department {
   final String outcomes;
   final String icon;
 
-  String get iconUrl {
-    return '${AppConfig.directusAssetsEndpoint}/$icon';
-  }
+  String get iconUrl => '${AppConfig.directusAssetsEndpoint}/$icon';
 
   Department({
     required this.id,

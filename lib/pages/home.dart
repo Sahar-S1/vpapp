@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_it_mixin/get_it_mixin.dart';
 import 'package:go_router/go_router.dart';
+import 'package:vpapp/components/auth/user_action.dart';
 
 import 'package:vpapp/components/common/drawer.dart';
 import 'package:vpapp/components/common/page_template.dart';
@@ -40,6 +41,9 @@ class _HomePageState extends State<HomePage> with GetItStateMixin {
       parentBuilder: ({required child, required title}) => Scaffold(
         appBar: AppBar(
           title: Text(title),
+          actions: [
+            UserAction(),
+          ],
         ),
         drawer: const AppDrawer(),
         body: child,

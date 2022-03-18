@@ -70,9 +70,7 @@ class Faculty {
   final String photo;
   final int departmentId;
 
-  String get photoUrl {
-    return '${AppConfig.directusAssetsEndpoint}/$photo';
-  }
+  String get photoUrl => '${AppConfig.directusAssetsEndpoint}/$photo';
 
   Faculty({
     required this.id,
