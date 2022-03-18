@@ -23,12 +23,15 @@ class LoginPage extends StatelessWidget {
         key: _formKey,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         child: Padding(
-          padding: const EdgeInsets.all(45.0),
+          padding: const EdgeInsets.symmetric(horizontal: 24.0),
           child: Column(
             children: [
+              const Spacer(),
               CachedNetworkImage(
                 imageUrl: AppConfig.logoUrl,
                 color: theme.colorScheme.primaryContainer,
+                width: 0.6 * MediaQuery.of(context).size.width,
+                fit: BoxFit.fill,
                 progressIndicatorBuilder: (context, url, downloadProgress) {
                   return Center(
                     child: CircularProgressIndicator(
@@ -42,7 +45,7 @@ class LoginPage extends StatelessWidget {
                   );
                 },
               ),
-              const Spacer(),
+              const SizedBox(height: 56.0),
               FormBuilderTextField(
                 name: 'username',
                 decoration: const InputDecoration(
@@ -102,7 +105,7 @@ class LoginPage extends StatelessWidget {
                 ]),
                 keyboardType: TextInputType.visiblePassword,
               ),
-              const Spacer(),
+              const SizedBox(height: 20),
               InkWell(
                 onTap: () {
                   _formKey.currentState?.save();
@@ -114,16 +117,15 @@ class LoginPage extends StatelessWidget {
                   context.goNamed(HomePage.routeName);
                 },
                 child: Container(
-                  padding: const EdgeInsets.all(12.0),
+                  padding: const EdgeInsets.all(10.0),
                   decoration: BoxDecoration(
                     color: theme.colorScheme.primaryContainer,
                     borderRadius: BorderRadius.circular(30.0),
                   ),
-                  child: const Center(
+                  child: Center(
                     child: Text(
                       'Login',
-                      style: TextStyle(
-                        fontSize: 25.0,
+                      style: theme.textTheme.titleLarge?.copyWith(
                         color: Colors.white,
                       ),
                     ),
@@ -132,7 +134,7 @@ class LoginPage extends StatelessWidget {
               ),
               const SizedBox(height: 10),
               const Text('Forgot password? Contact admin'),
-              const Spacer(),
+              const Spacer(flex: 2)
             ],
           ),
         ),
