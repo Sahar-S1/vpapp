@@ -136,7 +136,7 @@ class Course {
   final int id;
   final String name;
   final String code;
-  final String abbrivation;
+  final String abbr;
   final String syllabus;
   final Semester semester;
   final int departmentId;
@@ -145,7 +145,7 @@ class Course {
     required this.id,
     required this.name,
     required this.code,
-    required this.abbrivation,
+    required this.abbr,
     required this.syllabus,
     required this.semester,
     required this.departmentId,
@@ -155,7 +155,7 @@ class Course {
     int? id,
     String? name,
     String? code,
-    String? abbrivation,
+    String? abbr,
     String? syllabus,
     Semester? semester,
     int? departmentId,
@@ -164,7 +164,7 @@ class Course {
       id: id ?? this.id,
       name: name ?? this.name,
       code: code ?? this.code,
-      abbrivation: abbrivation ?? this.abbrivation,
+      abbr: abbr ?? this.abbr,
       syllabus: syllabus ?? this.syllabus,
       semester: semester ?? this.semester,
       departmentId: departmentId ?? this.departmentId,
@@ -176,7 +176,7 @@ class Course {
       'id': id,
       'name': name,
       'code': code,
-      'abbrivation': abbrivation,
+      'abbr': abbr,
       'syllabus': syllabus,
       'semester': semester.toMap(),
       'departmentId': departmentId,
@@ -188,7 +188,7 @@ class Course {
       id: map['course_id']['id']?.toInt() ?? 0,
       name: map['course_id']['name'] ?? '',
       code: map['course_id']['code'] ?? '',
-      abbrivation: map['course_id']['abbrivation'] ?? '',
+      abbr: map['course_id']['abbr'] ?? '',
       syllabus: map['course_id']['syllabus'] ?? '',
       semester: Semester.fromMap(map['semester_id']),
       departmentId: map['department_id']['id']?.toInt() ?? 0,
@@ -201,7 +201,7 @@ class Course {
 
   @override
   String toString() {
-    return 'Course(id: $id, name: $name, code: $code, abbrivation: $abbrivation, syllabus: $syllabus, semester: $semester, departmentId: $departmentId)';
+    return 'Course(id: $id, name: $name, code: $code, abbr: $abbr, syllabus: $syllabus, semester: $semester, departmentId: $departmentId)';
   }
 
   @override
@@ -212,7 +212,7 @@ class Course {
         other.id == id &&
         other.name == name &&
         other.code == code &&
-        other.abbrivation == abbrivation &&
+        other.abbr == abbr &&
         other.syllabus == syllabus &&
         other.semester == semester &&
         other.departmentId == departmentId;
@@ -223,7 +223,7 @@ class Course {
     return id.hashCode ^
         name.hashCode ^
         code.hashCode ^
-        abbrivation.hashCode ^
+        abbr.hashCode ^
         syllabus.hashCode ^
         semester.hashCode ^
         departmentId.hashCode;

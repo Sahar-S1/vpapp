@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get_it_mixin/get_it_mixin.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:vpapp/components/common/text_icon_card.dart';
+import 'package:vpapp/components/department/course_card.dart';
 import 'package:vpapp/models/course.dart';
 import 'package:vpapp/services/course.dart';
-import 'package:vpapp/services/semester.dart';
 
 class CoursesList extends StatefulWidget with GetItStatefulWidgetMixin {
   final int departmentId;
@@ -70,8 +69,7 @@ class _CoursesListState extends State<CoursesList> with GetItStateMixin {
         scrollController: widget.scrollController,
         pagingController: _pagingController,
         builderDelegate: PagedChildBuilderDelegate<Course>(
-          itemBuilder: (context, course, index) =>
-              TextIconCard(text: course.code),
+          itemBuilder: (context, course, index) => CourseCard(course: course),
         ),
       ),
     );
