@@ -1,32 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:get_it_mixin/get_it_mixin.dart';
-import 'package:go_router/go_router.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:vpapp/components/common/text_icon_card.dart';
 import 'package:vpapp/models/course.dart';
-import 'package:vpapp/pages/depearment_courses.dart';
+import 'package:vpapp/services/course.dart';
 import 'package:vpapp/services/semester.dart';
 
-class SemestersList extends StatefulWidget with GetItStatefulWidgetMixin {
+class CoursesList extends StatefulWidget with GetItStatefulWidgetMixin {
   final int departmentId;
   final int yearId;
+  final int semesterId;
   final ScrollController scrollController;
 
-  SemestersList({
+  CoursesList({
     Key? key,
     required this.departmentId,
     required this.yearId,
+    required this.semesterId,
     required this.scrollController,
   }) : super(key: key);
 
   @override
-  _SemestersListState createState() => _SemestersListState();
+  _CoursesListState createState() => _CoursesListState();
 }
 
-class _SemestersListState extends State<SemestersList> with GetItStateMixin {
+class _CoursesListState extends State<CoursesList> with GetItStateMixin {
   static const _pageSize = 20;
 
-  final PagingController<int, Semester> _pagingController =
+  final PagingController<int, Course> _pagingController =
       PagingController(firstPageKey: 1);
 
   @override
@@ -39,11 +40,12 @@ class _SemestersListState extends State<SemestersList> with GetItStateMixin {
 
   Future<void> _fetchPage(int pageKey) async {
     try {
-      final newItems = await get<SemesterService>().getPage(
+      final newItems = await get<CourseService>().getPage(
         pageKey,
         _pageSize,
         params: {
-          'filter[year][id][_eq]': widget.yearId,
+          'filter[department_id][id][_eq]': widget.departmentId,
+          'filter[semester_id][id][_eq]': widget.semesterId,
         },
       );
       final isLastPage = newItems.length < _pageSize;
@@ -64,21 +66,12 @@ class _SemestersListState extends State<SemestersList> with GetItStateMixin {
       onRefresh: () => Future.sync(
         () => _pagingController.refresh(),
       ),
-      child: PagedListView<int, Semester>(
+      child: PagedListView<int, Course>(
         scrollController: widget.scrollController,
         pagingController: _pagingController,
-        builderDelegate: PagedChildBuilderDelegate<Semester>(
-          itemBuilder: (context, semester, index) => InkWell(
-            onTap: () => context.goNamed(
-              DepartmentCoursesPage.routeName,
-              params: {
-                'id': widget.departmentId.toString(),
-                'year': widget.yearId.toString(),
-                'semester': semester.id.toString(),
-              },
-            ),
-            child: TextIconCard(text: semester.title),
-          ),
+        builderDelegate: PagedChildBuilderDelegate<Course>(
+          itemBuilder: (context, course, index) =>
+              TextIconCard(text: course.code),
         ),
       ),
     );

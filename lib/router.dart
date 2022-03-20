@@ -7,6 +7,7 @@ import 'package:vpapp/pages/clubs.dart';
 import 'package:vpapp/pages/department.dart';
 import 'package:vpapp/pages/department_faculty.dart';
 import 'package:vpapp/pages/department_info.dart';
+import 'package:vpapp/pages/depearment_courses.dart';
 import 'package:vpapp/pages/depearment_semesters.dart';
 import 'package:vpapp/pages/depearment_years.dart';
 import 'package:vpapp/pages/home.dart';
@@ -166,6 +167,27 @@ final router = GoRouter(
                   routes: [
                     GoRoute(
                       path: ':semester',
+                      name: DepartmentCoursesPage.routeName,
+                      builder: (context, state) {
+                        String? id = state.params['id'];
+                        String? year = state.params['year'];
+                        String? semester = state.params['semester'];
+
+                        if (id == null ||
+                            int.tryParse(id) == null ||
+                            year == null ||
+                            int.tryParse(year) == null ||
+                            semester == null ||
+                            int.tryParse(semester) == null) {
+                          return HomePage();
+                        }
+
+                        return DepartmentCoursesPage(
+                          id: int.parse(id),
+                          year: int.parse(year),
+                          semester: int.parse(semester),
+                        );
+                      },
                     ),
                   ],
                 ),
