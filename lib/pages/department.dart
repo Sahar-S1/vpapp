@@ -9,6 +9,7 @@ import 'package:vpapp/config.dart';
 import 'package:vpapp/models/department.dart';
 import 'package:vpapp/pages/department_faculty.dart';
 import 'package:vpapp/pages/department_info.dart';
+import 'package:vpapp/pages/depearment_years.dart';
 import 'package:vpapp/services/department.dart';
 
 class DepartmentPage extends StatelessWidget with GetItMixin {
@@ -72,10 +73,18 @@ class DepartmentPage extends StatelessWidget with GetItMixin {
                         '${AppConfig.directusAssetsEndpoint}/769746a4-824c-49a0-a1e9-4a8edf0feed4',
                   ),
                 ),
-                const TextIconCard(
-                  text: 'Courses',
-                  iconUrl:
-                      '${AppConfig.directusAssetsEndpoint}/a7dec110-c387-4733-8185-041c807f9bdb',
+                InkWell(
+                  onTap: () => context.goNamed(
+                    DepartmentYearsPage.routeName,
+                    params: {
+                      'id': department.id.toString(),
+                    },
+                  ),
+                  child: const TextIconCard(
+                    text: 'Courses',
+                    iconUrl:
+                        '${AppConfig.directusAssetsEndpoint}/a7dec110-c387-4733-8185-041c807f9bdb',
+                  ),
                 ),
               ],
             ),
