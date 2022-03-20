@@ -10,6 +10,8 @@ import 'package:vpapp/services/department.dart';
 import 'package:vpapp/services/directus.dart';
 import 'package:vpapp/services/faculty.dart';
 import 'package:vpapp/services/info.dart';
+import 'package:vpapp/services/semester.dart';
+import 'package:vpapp/services/year.dart';
 import 'package:vpapp/theme.dart';
 
 Future<void> init() async {
@@ -58,6 +60,12 @@ Future<void> _initServices() async {
   );
   getIt.registerSingleton<CourseService>(
     CourseService(directus: getIt.get<DirectusService>()),
+  );
+  getIt.registerSingleton<YearService>(
+    YearService(directus: getIt.get<DirectusService>()),
+  );
+  getIt.registerSingleton<SemesterService>(
+    SemesterService(directus: getIt.get<DirectusService>()),
   );
 
   await getIt.allReady();
