@@ -15,7 +15,4 @@ class FacultyService extends ItemService<Faculty> {
 
   @override
   Faculty Function(Map<String, dynamic> p1) get fromMap => Faculty.fromMap;
-
-  @override
-  String? get filter => 'filter[department][_eq]';
 }

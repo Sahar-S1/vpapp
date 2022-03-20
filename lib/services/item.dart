@@ -5,7 +5,6 @@ abstract class ItemService<I> {
   List<String> get sort;
   List<String> get fields;
   I Function(Map<String, dynamic>) get fromMap;
-  String? get filter => null;
 
   String get endpoint => '/items/$name';
 
@@ -13,24 +12,25 @@ abstract class ItemService<I> {
 
   const ItemService({required DirectusService directus}) : _directus = directus;
 
-  Future<int> getCount({dynamic filterValue}) async {
+  Future<int> getCount({Map<String, dynamic>? params}) async {
     var res = await _directus.dio.get(
       endpoint,
       queryParameters: {
         'aggregate[count]': 'id',
-        if (filter != null && filterValue != null) filter!: filterValue!,
+        ...params ?? {},
       },
     );
 
     return res.data['data'][0]['count']['id'] as int;
   }
 
-  Future<I> getOne(int id) async {
+  Future<I> getOne(int id, {Map<String, dynamic>? params}) async {
     var res = await _directus.dio.get(
       endpoint,
       queryParameters: {
         'fields': fields,
         'filter[id][_eq]': id,
+        ...params ?? {},
       },
     );
 
@@ -38,7 +38,7 @@ abstract class ItemService<I> {
   }
 
   Future<List<I>> getPage(int pageKey, int pageSize,
-      {dynamic filterValue}) async {
+      {Map<String, dynamic>? params}) async {
     var page = ((pageKey - 1) / pageSize) + 1;
 
     var res = await _directus.dio.get(
@@ -48,20 +48,20 @@ abstract class ItemService<I> {
         'page': page,
         'limit': pageSize,
         'sort': sort,
-        if (filter != null && filterValue != null) filter!: filterValue!,
+        ...params ?? {},
       },
     );
 
     return (res.data['data'] as List<dynamic>).map((e) => fromMap(e)).toList();
   }
 
-  Future<List<I>> getAll({dynamic filterValue}) async {
+  Future<List<I>> getAll({Map<String, dynamic>? params}) async {
     var res = await _directus.dio.get(
       endpoint,
       queryParameters: {
         'fields': fields,
         'sort': sort,
-        if (filter != null && filterValue != null) filter!: filterValue!,
+        ...params ?? {},
       },
     );
 

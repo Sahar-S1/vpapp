@@ -15,7 +15,4 @@ class CourseService extends ItemService<Course> {
 
   @override
   Course Function(Map<String, dynamic> p1) get fromMap => Course.fromMap;
-
-  @override
-  String? get filter => 'filter[department_id][_eq]';
 }

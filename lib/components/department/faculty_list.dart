@@ -33,8 +33,13 @@ class _FacultyListState extends State<FacultyList> with GetItStateMixin {
 
   Future<void> _fetchPage(int pageKey) async {
     try {
-      final newItems = await get<FacultyService>()
-          .getPage(pageKey, _pageSize, filterValue: widget.departmentId);
+      final newItems = await get<FacultyService>().getPage(
+        pageKey,
+        _pageSize,
+        params: {
+          'filter[department][_eq]': widget.departmentId,
+        },
+      );
       final isLastPage = newItems.length < _pageSize;
       if (isLastPage) {
         _pagingController.appendLastPage(newItems);
