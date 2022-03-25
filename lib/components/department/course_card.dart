@@ -33,7 +33,7 @@ class CourseCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Expanded(
-                flex: 7,
+                flex: 8,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -41,7 +41,7 @@ class CourseCard extends StatelessWidget {
                     Text(
                       course.name,
                       style: theme.textTheme.titleMedium?.copyWith(
-                        color: theme.primaryColor,
+                        color: theme.colorScheme.primary,
                       ),
                     ),
                     Text(
@@ -52,14 +52,14 @@ class CourseCard extends StatelessWidget {
                     Text(
                       'View Syllabus',
                       style: theme.textTheme.labelSmall?.copyWith(
-                        color: theme.primaryColor,
+                        color: theme.colorScheme.primary,
                       ),
                     ),
                   ],
                 ),
               ),
               Expanded(
-                flex: 3,
+                flex: 2,
                 child: Text(
                   course.abbr,
                   textAlign: TextAlign.left,
