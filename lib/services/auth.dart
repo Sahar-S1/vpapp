@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:fresh_dio/fresh_dio.dart';
 import 'package:vpapp/config.dart';
@@ -55,7 +55,10 @@ class AuthService with ChangeNotifier {
         },
       );
       await fresh.setToken(DirectusToken.fromMap(res.data['data']));
-    } on DioError catch (_) {
+    } on DioError catch (error) {
+      if (kDebugMode) {
+        print(error.message);
+      }
       await fresh.setToken(null);
     }
   }
@@ -68,7 +71,11 @@ class AuthService with ChangeNotifier {
           'refresh_token': (await fresh.token)?.refreshToken,
         },
       );
-    } on DioError catch (_) {}
+    } on DioError catch (error) {
+      if (kDebugMode) {
+        print(error.message);
+      }
+    }
 
     await fresh.setToken(null);
   }
@@ -89,7 +96,10 @@ class AuthService with ChangeNotifier {
         },
       );
       currentUser.value = DirectusUser.fromMap(res.data['data']);
-    } on DioError catch (_) {
+    } on DioError catch (error) {
+      if (kDebugMode) {
+        print(error.message);
+      }
       currentUser.value = null;
     }
     notifyListeners();
