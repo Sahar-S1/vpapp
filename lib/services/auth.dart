@@ -57,7 +57,7 @@ class AuthService with ChangeNotifier {
       await fresh.setToken(DirectusToken.fromMap(res.data['data']));
     } on DioError catch (error) {
       if (kDebugMode) {
-        print(error.message);
+        print(error.response?.data);
       }
       await fresh.setToken(null);
     }
@@ -73,7 +73,7 @@ class AuthService with ChangeNotifier {
       );
     } on DioError catch (error) {
       if (kDebugMode) {
-        print(error.message);
+        print(error.response?.data);
       }
     }
 
@@ -98,7 +98,7 @@ class AuthService with ChangeNotifier {
       currentUser.value = DirectusUser.fromMap(res.data['data']);
     } on DioError catch (error) {
       if (kDebugMode) {
-        print(error.message);
+        print(error.response?.data);
       }
       currentUser.value = null;
     }
