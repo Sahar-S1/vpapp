@@ -15,7 +15,9 @@ class DiscussionService extends ItemService<Discussion> {
         '*',
         'comments.*',
         'user_created.*',
+        'user_created.role.*',
         'comments.user_created.*',
+        'comments.user_created.role.*',
       ];
 
   @override
