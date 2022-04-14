@@ -8,7 +8,7 @@ import 'package:vpapp/models/directus.dart';
 class DisucssionComment {
   static final _dateCreatedFormat = DateFormat('yyyy-MM-ddTHH:mm:ssZ');
 
-  final String id;
+  final int id;
   final String comment;
   final DirectusUser userCreated;
   final DateTime dateCreated;
@@ -21,7 +21,7 @@ class DisucssionComment {
   });
 
   DisucssionComment copyWith({
-    String? id,
+    int? id,
     String? comment,
     DirectusUser? userCreated,
     DateTime? dateCreated,
@@ -45,7 +45,7 @@ class DisucssionComment {
 
   factory DisucssionComment.fromMap(Map<String, dynamic> map) {
     return DisucssionComment(
-      id: map['id'] ?? '',
+      id: map['id']?.toInt() ?? 0,
       comment: map['comment'] ?? '',
       userCreated: DirectusUser.fromMap(map['user_created']),
       dateCreated: _dateCreatedFormat.parse(map['date_created']),
@@ -85,7 +85,7 @@ class DisucssionComment {
 class Discussion {
   static final _dateCreatedFormat = DateFormat('yyyy-MM-ddTHH:mm:ssZ');
 
-  final String id;
+  final int id;
   final String title;
   final List<DisucssionComment> comments;
   final DirectusUser userCreated;
@@ -100,7 +100,7 @@ class Discussion {
   });
 
   Discussion copyWith({
-    String? id,
+    int? id,
     String? title,
     List<DisucssionComment>? comments,
     DirectusUser? userCreated,
@@ -127,7 +127,7 @@ class Discussion {
 
   factory Discussion.fromMap(Map<String, dynamic> map) {
     return Discussion(
-      id: map['id'] ?? '',
+      id: map['id']?.toInt() ?? 0,
       title: map['title'] ?? '',
       comments: List<DisucssionComment>.from(
           map['comments']?.map((x) => DisucssionComment.fromMap(x))),
