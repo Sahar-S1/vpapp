@@ -22,4 +22,27 @@ class DiscussionService extends ItemService<Discussion> {
 
   @override
   Discussion Function(Map<String, dynamic>) get fromMap => Discussion.fromMap;
+
+  Future<int> discuss(String title) async {
+    var res = await directus.dio.post(
+      endpoint,
+      data: {
+        'title': title,
+      },
+    );
+
+    return res.data['data']['id'];
+  }
+
+  Future<int> comment(Discussion discussion, String text) async {
+    var res = await directus.dio.post(
+      '${endpoint}_comment',
+      data: {
+        'comment': text,
+        'discussion': discussion.id,
+      },
+    );
+
+    return res.data['data']['id'];
+  }
 }

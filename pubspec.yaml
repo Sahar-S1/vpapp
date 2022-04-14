@@ -37,6 +37,8 @@ dependencies:
   flutter_form_builder: ^7.1.1 # Form Builder
   form_builder_validators: ^7.7.0 # Form Builder Validators
   infinite_scroll_pagination: ^3.1.0 # Pageinated List/Grid
+  flutter_chat_ui: ^1.5.7 # Chat UI
+  flutter_chat_types: ^3.3.4 # Chat UI Types
 
   # Functional
   intl: ^0.17.0 # Date Formater

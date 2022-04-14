@@ -10,6 +10,8 @@ import 'package:vpapp/pages/department_info.dart';
 import 'package:vpapp/pages/depearment_courses.dart';
 import 'package:vpapp/pages/depearment_semesters.dart';
 import 'package:vpapp/pages/depearment_years.dart';
+import 'package:vpapp/pages/discussion.dart';
+import 'package:vpapp/pages/discussions.dart';
 import 'package:vpapp/pages/home.dart';
 import 'package:vpapp/pages/info.dart';
 import 'package:vpapp/pages/info_list.dart';
@@ -192,6 +194,26 @@ final router = GoRouter(
                   ],
                 ),
               ],
+            ),
+          ],
+        ),
+        GoRoute(
+          path: 'discussions',
+          name: DiscussionsPage.routeName,
+          builder: (context, state) => const DiscussionsPage(),
+          routes: [
+            GoRoute(
+              path: ':id',
+              name: DiscussionPage.routeName,
+              builder: (context, state) {
+                String? id = state.params['id'];
+
+                if (id == null || int.tryParse(id) == null) {
+                  return const DiscussionsPage();
+                }
+
+                return DiscussionPage(id: int.parse(id));
+              },
             ),
           ],
         ),

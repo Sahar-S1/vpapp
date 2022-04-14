@@ -8,6 +8,7 @@ import 'package:vpapp/models/directus.dart';
 import 'package:vpapp/pages/announcements.dart';
 import 'package:vpapp/pages/blogs.dart';
 import 'package:vpapp/pages/clubs.dart';
+import 'package:vpapp/pages/discussions.dart';
 import 'package:vpapp/pages/home.dart';
 import 'package:vpapp/pages/info_list.dart';
 import 'package:vpapp/pages/login.dart';
@@ -55,7 +56,7 @@ class AppDrawer extends StatelessWidget with GetItMixin {
     ),
     Link(
       name: 'Discussions',
-      link: '',
+      link: DiscussionsPage.routeName,
       icon: Icons.comment,
       allowedRoles: [],
     ),
