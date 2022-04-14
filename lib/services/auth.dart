@@ -30,12 +30,21 @@ class AuthService with ChangeNotifier {
               throw RevokeTokenException();
             }
 
-            var res = await directus.dio.post(
-              _refreshEndpoint,
-              data: token.toMap(),
-            );
+            try {
+              var res = await directus.dio.post(
+                _refreshEndpoint,
+                data: token.toMap(),
+              );
 
-            return DirectusToken.fromMap(res.data);
+              return DirectusToken.fromMap(res.data);
+            } on DioError catch (error) {
+              if (kDebugMode) {
+                print(error.response?.data);
+              }
+              throw RevokeTokenException();
+            } catch (error) {
+              throw RevokeTokenException();
+            }
           },
         ) {
     directus.dio.interceptors.add(fresh);
