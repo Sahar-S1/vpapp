@@ -8,12 +8,12 @@ abstract class ItemService<I> {
 
   String get endpoint => '/items/$name';
 
-  final DirectusService _directus;
+  final DirectusService directus;
 
-  const ItemService({required DirectusService directus}) : _directus = directus;
+  const ItemService({required this.directus});
 
   Future<int> getCount({Map<String, dynamic>? params}) async {
-    var res = await _directus.dio.get(
+    var res = await directus.dio.get(
       endpoint,
       queryParameters: {
         'aggregate[count]': 'id',
@@ -25,7 +25,7 @@ abstract class ItemService<I> {
   }
 
   Future<I> getOne(int id, {Map<String, dynamic>? params}) async {
-    var res = await _directus.dio.get(
+    var res = await directus.dio.get(
       endpoint,
       queryParameters: {
         'fields': fields,
@@ -41,7 +41,7 @@ abstract class ItemService<I> {
       {Map<String, dynamic>? params}) async {
     var page = ((pageKey - 1) / pageSize) + 1;
 
-    var res = await _directus.dio.get(
+    var res = await directus.dio.get(
       endpoint,
       queryParameters: {
         'fields': fields,
@@ -56,7 +56,7 @@ abstract class ItemService<I> {
   }
 
   Future<List<I>> getAll({Map<String, dynamic>? params}) async {
-    var res = await _directus.dio.get(
+    var res = await directus.dio.get(
       endpoint,
       queryParameters: {
         'fields': fields,
