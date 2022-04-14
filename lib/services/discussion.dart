@@ -28,18 +28,20 @@ class DiscussionService extends ItemService<Discussion> {
       endpoint,
       data: {
         'title': title,
+        'status': 'published',
       },
     );
 
     return res.data['data']['id'];
   }
 
-  Future<int> comment(Discussion discussion, String text) async {
+  Future<int> comment(String text, int discussionId) async {
     var res = await directus.dio.post(
       '${endpoint}_comment',
       data: {
         'comment': text,
-        'discussion': discussion.id,
+        'discussion': discussionId,
+        'status': 'published',
       },
     );
 

@@ -75,7 +75,7 @@ class DiscussionPage extends StatelessWidget with GetItMixin {
                     .toList(),
                 onSendPressed: (text) {
                   get<DiscussionService>()
-                      .comment(discussion, text.text)
+                      .comment(text.text, discussion.id)
                       .then((value) => setState(() {}));
                 },
               ),

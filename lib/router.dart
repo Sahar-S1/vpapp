@@ -200,7 +200,7 @@ final router = GoRouter(
         GoRoute(
           path: 'discussions',
           name: DiscussionsPage.routeName,
-          builder: (context, state) => const DiscussionsPage(),
+          builder: (context, state) => DiscussionsPage(),
           routes: [
             GoRoute(
               path: ':id',
@@ -209,7 +209,7 @@ final router = GoRouter(
                 String? id = state.params['id'];
 
                 if (id == null || int.tryParse(id) == null) {
-                  return const DiscussionsPage();
+                  return DiscussionsPage();
                 }
 
                 return DiscussionPage(id: int.parse(id));
