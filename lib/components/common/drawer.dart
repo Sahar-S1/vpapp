@@ -1,24 +1,37 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it_mixin/get_it_mixin.dart';
 import 'package:go_router/go_router.dart';
 import 'package:vpapp/components/common/theme_change_btn.dart';
 import 'package:vpapp/config.dart';
+import 'package:vpapp/models/directus.dart';
 import 'package:vpapp/pages/announcements.dart';
 import 'package:vpapp/pages/blogs.dart';
 import 'package:vpapp/pages/clubs.dart';
 import 'package:vpapp/pages/home.dart';
 import 'package:vpapp/pages/info_list.dart';
 import 'package:vpapp/pages/login.dart';
+import 'package:vpapp/services/auth.dart';
 
 class Link {
   final String name;
   final String link;
   final IconData icon;
 
-  const Link({required this.name, required this.link, required this.icon});
+  // Null means everyone can see it
+  // Empty List means only logged in users can see it
+  // Otherwise Users with Roles in the Array will be able to see it
+  final List<String>? allowedRoles;
+
+  const Link({
+    required this.name,
+    required this.link,
+    required this.icon,
+    this.allowedRoles,
+  });
 }
 
-class AppDrawer extends StatelessWidget {
+class AppDrawer extends StatelessWidget with GetItMixin {
   static const List<Link> _links = [
     Link(
       name: 'Home',
@@ -41,6 +54,12 @@ class AppDrawer extends StatelessWidget {
       icon: Icons.campaign,
     ),
     Link(
+      name: 'Discussions',
+      link: '',
+      icon: Icons.comment,
+      allowedRoles: [],
+    ),
+    Link(
       name: 'About College',
       link: InfoListPage.routeName,
       icon: Icons.info,
@@ -52,7 +71,7 @@ class AppDrawer extends StatelessWidget {
     ),
   ];
 
-  const AppDrawer({Key? key}) : super(key: key);
+  AppDrawer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -94,16 +113,27 @@ class AppDrawer extends StatelessWidget {
               ),
             ],
           ),
-          for (var link in _links)
-            ListTile(
-              leading: Icon(link.icon),
-              title: Text(
-                link.name,
-                style: theme.textTheme.titleLarge,
-                textAlign: TextAlign.left,
-              ),
-              onTap: () => context.goNamed(link.link),
+          ValueListenableBuilder<DirectusUser?>(
+            valueListenable: get<AuthService>().currentUser,
+            builder: (context, currentUser, child) => Column(
+              children: [
+                for (var link in _links)
+                  if (link.allowedRoles == null ||
+                      (currentUser != null &&
+                          (link.allowedRoles!.isEmpty ||
+                              link.allowedRoles!.contains(currentUser.role))))
+                    ListTile(
+                      leading: Icon(link.icon),
+                      title: Text(
+                        link.name,
+                        style: theme.textTheme.titleLarge,
+                        textAlign: TextAlign.left,
+                      ),
+                      onTap: () => context.goNamed(link.link),
+                    ),
+              ],
             ),
+          ),
           const SizedBox(height: 40),
           Align(
             alignment: Alignment.center,

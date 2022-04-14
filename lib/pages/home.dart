@@ -45,7 +45,7 @@ class _HomePageState extends State<HomePage> with GetItStateMixin {
             UserAction(),
           ],
         ),
-        drawer: const AppDrawer(),
+        drawer: AppDrawer(),
         body: child,
       ),
       childBuilder: (sc) => SingleChildScrollView(
