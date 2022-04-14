@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it_mixin/get_it_mixin.dart';
 import 'package:go_router/go_router.dart';
+import 'package:vpapp/models/directus.dart';
 import 'package:vpapp/pages/login.dart';
 import 'package:vpapp/services/auth.dart';
 
