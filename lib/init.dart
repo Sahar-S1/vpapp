@@ -8,6 +8,7 @@ import 'package:vpapp/services/club.dart';
 import 'package:vpapp/services/course.dart';
 import 'package:vpapp/services/department.dart';
 import 'package:vpapp/services/directus.dart';
+import 'package:vpapp/services/discussion.dart';
 import 'package:vpapp/services/faculty.dart';
 import 'package:vpapp/services/info.dart';
 import 'package:vpapp/services/semester.dart';
@@ -66,6 +67,9 @@ Future<void> _initServices() async {
   );
   getIt.registerSingleton<SemesterService>(
     SemesterService(directus: getIt.get<DirectusService>()),
+  );
+  getIt.registerSingleton<DiscussionService>(
+    DiscussionService(directus: getIt.get<DirectusService>()),
   );
 
   await getIt.allReady();
