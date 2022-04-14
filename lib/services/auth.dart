@@ -33,7 +33,10 @@ class AuthService with ChangeNotifier {
             try {
               var res = await httpClient.post(
                 _refreshEndpoint,
-                data: token.toMap(),
+                data: {
+                  'refresh_token': token.refreshToken,
+                  'mode': 'json',
+                },
               );
 
               return DirectusToken.fromMap(res.data);
