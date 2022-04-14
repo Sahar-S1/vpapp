@@ -35,42 +35,41 @@ Future<void> _initHive() async {
 Future<void> _initServices() async {
   var getIt = GetIt.instance;
 
-  getIt.registerSingleton<DirectusService>(
-    await DirectusService().init(),
-  );
-  getIt.registerSingleton<AuthService>(
-    AuthService(directus: getIt.get<DirectusService>()),
-  );
-  getIt.registerSingleton<AnnouncementService>(
-    AnnouncementService(directus: getIt.get<DirectusService>()),
-  );
-  getIt.registerSingleton<ClubService>(
-    ClubService(directus: getIt.get<DirectusService>()),
-  );
-  getIt.registerSingleton<BlogService>(
-    BlogService(directus: getIt.get<DirectusService>()),
-  );
-  getIt.registerSingleton<InfoService>(
-    InfoService(directus: getIt.get<DirectusService>()),
-  );
-  getIt.registerSingleton<DepartmentService>(
-    DepartmentService(directus: getIt.get<DirectusService>()),
-  );
-  getIt.registerSingleton<FacultyService>(
-    FacultyService(directus: getIt.get<DirectusService>()),
-  );
-  getIt.registerSingleton<CourseService>(
-    CourseService(directus: getIt.get<DirectusService>()),
-  );
-  getIt.registerSingleton<YearService>(
-    YearService(directus: getIt.get<DirectusService>()),
-  );
-  getIt.registerSingleton<SemesterService>(
-    SemesterService(directus: getIt.get<DirectusService>()),
-  );
-  getIt.registerSingleton<DiscussionService>(
-    DiscussionService(directus: getIt.get<DirectusService>()),
-  );
-
-  await getIt.allReady();
+  getIt
+    ..registerSingleton<DirectusService>(
+      await DirectusService().init(),
+    )
+    ..registerSingleton<AuthService>(
+      AuthService(directus: getIt.get<DirectusService>()),
+    )
+    ..registerSingleton<AnnouncementService>(
+      AnnouncementService(directus: getIt.get<DirectusService>()),
+    )
+    ..registerSingleton<ClubService>(
+      ClubService(directus: getIt.get<DirectusService>()),
+    )
+    ..registerSingleton<BlogService>(
+      BlogService(directus: getIt.get<DirectusService>()),
+    )
+    ..registerSingleton<InfoService>(
+      InfoService(directus: getIt.get<DirectusService>()),
+    )
+    ..registerSingleton<DepartmentService>(
+      DepartmentService(directus: getIt.get<DirectusService>()),
+    )
+    ..registerSingleton<FacultyService>(
+      FacultyService(directus: getIt.get<DirectusService>()),
+    )
+    ..registerSingleton<CourseService>(
+      CourseService(directus: getIt.get<DirectusService>()),
+    )
+    ..registerSingleton<YearService>(
+      YearService(directus: getIt.get<DirectusService>()),
+    )
+    ..registerSingleton<SemesterService>(
+      SemesterService(directus: getIt.get<DirectusService>()),
+    )
+    ..registerSingleton<DiscussionService>(
+      DiscussionService(directus: getIt.get<DirectusService>()),
+    );
 }
