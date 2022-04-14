@@ -31,7 +31,7 @@ class AuthService with ChangeNotifier {
             }
 
             try {
-              var res = await directus.dio.post(
+              var res = await httpClient.post(
                 _refreshEndpoint,
                 data: token.toMap(),
               );
