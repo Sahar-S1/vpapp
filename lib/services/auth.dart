@@ -45,8 +45,6 @@ class AuthService with ChangeNotifier {
                 print(error.response?.data);
               }
               throw RevokeTokenException();
-            } catch (error) {
-              throw RevokeTokenException();
             }
           },
         ) {
