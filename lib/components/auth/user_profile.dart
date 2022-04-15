@@ -30,9 +30,19 @@ class UserProfileDialog extends StatelessWidget with GetItMixin {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Text(
-                  'Profile',
-                  style: theme.textTheme.titleLarge,
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        'Profile',
+                        style: theme.textTheme.titleLarge,
+                      ),
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.close),
+                      onPressed: () => Navigator.of(context).pop(),
+                    ),
+                  ],
                 ),
                 SizedBox(
                   height: 80,
