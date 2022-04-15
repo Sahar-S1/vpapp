@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:fresh_dio/fresh_dio.dart';
+import 'package:vpapp/config.dart';
 import 'package:vpapp/models/directus.dart';
 
 import 'package:vpapp/services/directus.dart';
@@ -19,6 +20,12 @@ class AuthService with ChangeNotifier {
   AuthService({required DirectusService directus})
       : _directus = directus,
         fresh = Fresh<DirectusToken>(
+          httpClient: Dio(
+            BaseOptions(
+              baseUrl: AppConfig.directusEndpoint,
+              responseType: ResponseType.json,
+            ),
+          ),
           tokenHeader: (token) {
             return {
               'Authorization': 'Bearer ${token.accessToken}',
@@ -39,13 +46,16 @@ class AuthService with ChangeNotifier {
                 },
               );
 
-              return DirectusToken.fromMap(res.data);
+              return DirectusToken.fromMap(res.data['data']);
             } on DioError catch (error) {
               if (kDebugMode) {
                 print(error.response?.data);
               }
               throw RevokeTokenException();
             }
+          },
+          shouldRefresh: (response) {
+            return response?.statusCode == 401;
           },
         ) {
     directus.dio.interceptors.add(fresh);
