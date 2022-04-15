@@ -4,7 +4,6 @@ import 'package:flutter_chat_ui/flutter_chat_ui.dart'
 import 'package:flutter_chat_types/flutter_chat_types.dart'
     show TextMessage, User, Role;
 import 'package:get_it_mixin/get_it_mixin.dart';
-import 'package:intl/intl.dart';
 import 'package:vpapp/components/common/page_error.dart';
 import 'package:vpapp/components/common/page_loading.dart';
 import 'package:vpapp/models/directus.dart';
