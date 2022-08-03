@@ -117,13 +117,16 @@ class AppDrawer extends StatelessWidget with GetItMixin {
           ValueListenableBuilder<DirectusUser?>(
             valueListenable: get<AuthService>().currentUser,
             builder: (context, currentUser, child) => Column(
-              children: [
-                for (var link in _links)
-                  if (link.allowedRoles == null ||
-                      (currentUser != null &&
-                          (link.allowedRoles!.isEmpty ||
-                              link.allowedRoles!.contains(currentUser.role))))
-                    ListTile(
+              children: _links
+                  .where(
+                    (link) =>
+                        link.allowedRoles == null ||
+                        (currentUser != null &&
+                            (link.allowedRoles!.isEmpty ||
+                                link.allowedRoles!.contains(currentUser.role))),
+                  )
+                  .map(
+                    (link) => ListTile(
                       leading: Icon(link.icon),
                       title: Text(
                         link.name,
@@ -132,7 +135,8 @@ class AppDrawer extends StatelessWidget with GetItMixin {
                       ),
                       onTap: () => context.goNamed(link.link),
                     ),
-              ],
+                  )
+                  .toList(),
             ),
           ),
           const SizedBox(height: 40),
