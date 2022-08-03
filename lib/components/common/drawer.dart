@@ -118,24 +118,29 @@ class AppDrawer extends StatelessWidget with GetItMixin {
             valueListenable: get<AuthService>().currentUser,
             builder: (context, currentUser, child) => Column(
               children: _links
-                  .where(
-                    (link) =>
-                        link.allowedRoles == null ||
-                        (currentUser != null &&
-                            (link.allowedRoles!.isEmpty ||
-                                link.allowedRoles!.contains(currentUser.role))),
-                  )
-                  .map(
-                    (link) => ListTile(
-                      leading: Icon(link.icon),
-                      title: Text(
-                        link.name,
-                        style: theme.textTheme.titleLarge,
-                        textAlign: TextAlign.left,
-                      ),
-                      onTap: () => context.goNamed(link.link),
-                    ),
-                  )
+                  .where((link) {
+                    if (link.allowedRoles != null) {
+                      if (currentUser == null) {
+                        return false;
+                      } else {
+                        if (link.allowedRoles!.isNotEmpty &&
+                            !link.allowedRoles!.contains(currentUser.role)) {
+                          return false;
+                        }
+                      }
+                    }
+
+                    return true;
+                  })
+                  .map((link) => ListTile(
+                        leading: Icon(link.icon),
+                        title: Text(
+                          link.name,
+                          style: theme.textTheme.titleLarge,
+                          textAlign: TextAlign.left,
+                        ),
+                        onTap: () => context.goNamed(link.link),
+                      ))
                   .toList(),
             ),
           ),
