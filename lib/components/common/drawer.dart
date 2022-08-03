@@ -24,11 +24,17 @@ class Link {
   // Otherwise Users with Roles in the Array will be able to see it
   final List<String>? allowedRoles;
 
+  // Null means it shows it irrespective of login status
+  // True only shows it when user is logged in
+  // False only shows it when user is logged out
+  final bool? showWhenLoggedIn;
+
   const Link({
     required this.name,
     required this.link,
     required this.icon,
     this.allowedRoles,
+    this.showWhenLoggedIn,
   });
 }
 
@@ -69,6 +75,7 @@ class AppDrawer extends StatelessWidget with GetItMixin {
       name: 'Login',
       link: LoginPage.routeName,
       icon: Icons.login,
+      showWhenLoggedIn: false,
     ),
   ];
 
@@ -127,6 +134,16 @@ class AppDrawer extends StatelessWidget with GetItMixin {
                             !link.allowedRoles!.contains(currentUser.role)) {
                           return false;
                         }
+                      }
+                    }
+
+                    if (link.showWhenLoggedIn != null) {
+                      if (link.showWhenLoggedIn! && currentUser == null) {
+                        return false;
+                      }
+
+                      if (!link.showWhenLoggedIn! && currentUser != null) {
+                        return false;
                       }
                     }
 
